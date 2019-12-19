@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.border .border-dark {
+	padding: 1em;
+}
+
+button.btn-primary.btn.Ripple-parent.deleteTask.btn-sm {
+	padding: .2rem .4rem;
+	margin: .2rem;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.container.table {
+	margin: 10rem 0rem 20rem 0rem;
+	padding: 0rem;
+}
+
+.heading {
+	text-align: center;
+	margin: 10rem;
+}
