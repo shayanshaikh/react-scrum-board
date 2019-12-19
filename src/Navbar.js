@@ -1,7 +1,6 @@
 import React from 'react';
 import { MDBContainer, MDBBtn, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -19,14 +18,14 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const bgPink = {backgroundColor: '#505050'}
+    const bgPink = {backgroundColor: '#165fd9'}
     return(
       <div>
         <Router>
           <header>
             <MDBNavbar style={bgPink} dark expand="md" scrolling fixed="top">
               <MDBNavbarBrand href="/">
-                  <strong>SCRUM</strong>
+                  <strong>SCRUM BOARD</strong>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={ this.onClick } />
               <MDBCollapse isOpen = { this.state.collapse } navbar>
@@ -41,8 +40,8 @@ class Navbar extends React.Component {
                   <MDBNavItem>
                     {
                       this.props.user
-                        ? <MDBBtn size="md" onClick={this.props.signOut}>Sign out</MDBBtn>
-                        : <MDBBtn size="md" onClick={this.props.signInWithGoogle}>Log in</MDBBtn>
+                        ? <MDBBtn size="md" color="danger" onClick={this.props.signOut}>Sign out</MDBBtn>
+                        : this.props.signUp //<MDBBtn size="md" onClick={this.props.signInWithGoogle}>Log in</MDBBtn>
                     }
                   </MDBNavItem>
                 </MDBNavbarNav>
