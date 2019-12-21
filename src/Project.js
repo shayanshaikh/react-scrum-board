@@ -12,7 +12,7 @@ class Project extends React.Component {
     super(props);
     this.state = {
       showResults: false,
-      toggledProject: ''
+      toggledProject: []
     }
   }
     
@@ -21,10 +21,10 @@ class Project extends React.Component {
     itemRef.remove();
   }
 
-  toggle = (name) => {
+  toggle = (project) => {
     this.setState({
       showResults: true,
-      toggledProject: name
+      toggledProject: project
     });
     this.props.toggler();
   }
@@ -32,7 +32,7 @@ class Project extends React.Component {
   closeProject = () => {
     this.setState({
       showResults: false,
-      toggledProject: ''
+      toggledProject: []
     });
     this.props.toggler();
   }
@@ -53,13 +53,13 @@ class Project extends React.Component {
     return (
       <MDBContainer>
         
-        { this.state.showResults ? <Table toggler={this.closeProject} name={this.state.toggledProject} />
+        { this.state.showResults ? <Table toggler={this.closeProject} project={this.state.toggledProject} />
         : projects.map(project => (
-            <MDBCard key={project.id} style={{margin:10}}>
+            <MDBCard key={project.id} className="card">
             <MDBCardBody>
             <MDBCardTitle>Project {project.projectName}</MDBCardTitle>
             <MDBCardText>
-              <MDBBtn color="primary" size="sm" onClick={() => this.toggle(project.projectName)}>Open</MDBBtn>
+              <MDBBtn color="primary" size="sm" onClick={() => this.toggle(project)}>Open</MDBBtn>
               <MDBBtn color="primary" size="sm" onClick={() => this.removeProject(project.idd)}>Delete</MDBBtn>
             </MDBCardText>
             </MDBCardBody>

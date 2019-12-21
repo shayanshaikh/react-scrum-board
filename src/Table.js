@@ -5,6 +5,9 @@ import 'mdbreact/dist/css/mdb.css';
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
 import Rows from './Rows';
+import Goals from './Goals';
+import DOR from './DOR';
+import DOD from './DOD';
 import firebaseApp from './firebaseApp';
 
 class Table extends React.Component {
@@ -37,7 +40,7 @@ class Table extends React.Component {
     }
     const newItem = {
       storyName: this.state.storyName,
-      projectName: this.props.name,
+      projectName: this.props.project.projectName,
       id: Date.now(),
     };
 
@@ -73,14 +76,19 @@ class Table extends React.Component {
     var projectStory = []
 
     this.state.userstories.forEach( (s)=> {
-      if (s.projectName === this.props.name) {
+      if (s.projectName === this.props.project.projectName) {
         projectStory.push(s);
       }
     });
 
     return (
       <MDBContainer className="table">
-        <h1 className="heading">PROJECT {this.props.name} <MDBBtn color="primary" size="md" onClick={this.props.toggler}>Close</MDBBtn></h1>
+        <h1 className="heading">PROJECT {this.props.project.projectName} <MDBBtn color="primary" size="md" onClick={this.props.toggler}>Close</MDBBtn></h1>
+        <MDBRow>
+        <MDBCol md="4"><Goals projectID={this.props.project.idd} /></MDBCol>
+        <MDBCol md="4"><DOR projectID={this.props.project.idd} /></MDBCol>
+        <MDBCol md="4"><DOD projectID={this.props.project.idd} /></MDBCol>
+        </MDBRow>
         <h3 className="heading">Product Backlog</h3>
         <h4>Add new User Stories</h4>
         <MDBRow className="border border-dark">
