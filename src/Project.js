@@ -59,8 +59,8 @@ class Project extends React.Component {
             <MDBCardBody>
             <MDBCardTitle>Project {project.projectName}</MDBCardTitle>
             <MDBCardText>
-              <MDBBtn color="primary" size="sm" onClick={() => this.toggle(project)}>Open</MDBBtn>
-              <MDBBtn color="primary" size="sm" onClick={() => this.removeProject(project.idd)}>Delete</MDBBtn>
+              <MDBBtn color="info" size="sm" onClick={() => this.toggle(project)}>Open</MDBBtn>
+              <MDBBtn color="danger" size="sm" onClick={() => this.removeProject(project.idd)}>Delete</MDBBtn>
             </MDBCardText>
             </MDBCardBody>
             </MDBCard>

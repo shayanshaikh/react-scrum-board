@@ -25,7 +25,7 @@ class Navbar extends React.Component {
           <header>
             <MDBNavbar style={bgPink} dark expand="md" scrolling fixed="top">
               <MDBNavbarBrand href="/">
-                  <strong>SCRUM BOARD</strong>
+                  <strong>SCRUM BOARD (Beta)</strong>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={ this.onClick } />
               <MDBCollapse isOpen = { this.state.collapse } navbar>

@@ -88,7 +88,7 @@ class DOD extends React.Component {
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
-        <MDBCardText>{definition.definition} <MDBBtn className="deleteTask" color="primary" size="sm" onClick={() => this.removeDOD(definition.id)}>×</MDBBtn></MDBCardText>
+        <MDBCardText>{definition.definition} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeDOD(definition.id)}>×</MDBBtn></MDBCardText>
         </MDBCardBody>
         </MDBCard>
       ))}
@@ -104,7 +104,7 @@ class DOD extends React.Component {
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-          <MDBBtn color="primary" onClick={this.handleSubmit}>Save changes</MDBBtn>
+          <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
     </React.Fragment>

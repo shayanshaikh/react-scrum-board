@@ -90,7 +90,7 @@ class Goals extends React.Component {
       <MDBCardTitle>High Level Goals</MDBCardTitle>
       <MDBCardText>
       {goals.map(goal => (
-        <p key={goal.id}>{goalOrder}) {goal.goalName}</p>
+        <h5 key={goal.id}>{goalOrder}) {goal.goalName}</h5>
 		  ))}
       <MDBBtn color="primary" size="sm" onClick={this.toggle}>Add High level goals</MDBBtn>
       </MDBCardText>

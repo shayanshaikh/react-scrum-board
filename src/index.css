@@ -16,7 +16,7 @@ code {
 	padding: 1em;
 }
 
-button.btn-primary.btn.Ripple-parent.deleteTask.btn-sm {
+button.btn-danger.btn.Ripple-parent.deleteTask.btn-sm {
 	padding: .2rem .4rem;
 	margin: .2rem;
 	position: absolute;

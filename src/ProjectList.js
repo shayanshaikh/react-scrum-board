@@ -107,7 +107,7 @@ class ProjectList extends React.Component {
         }
         { user ? 
           <MDBContainer><Project toggler={this.projtoggle} projects={this.state.projects} /></MDBContainer>
-          : <MDBContainer><h1 className="heading">Scrum Made Simple</h1><h2 className="heading">Please login above to use our beautiful services.</h2></MDBContainer> }
+          : <MDBContainer><h1 className="heading">Scrum Made Simple (Beta)</h1><h2 className="heading">Please login above to use our beautiful services.</h2></MDBContainer> }
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
           <MDBModalHeader toggle={this.toggle}>Enter Project Details</MDBModalHeader>
           <MDBModalBody>

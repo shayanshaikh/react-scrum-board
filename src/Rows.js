@@ -131,18 +131,21 @@ class Rows extends React.Component {
 		  {this.props.userstories.map(userstory => (
       <MDBRow className="border border-dark" key={userstory.id}>
       <MDBCol md="3" className="border border-dark">
-		  <h5>{userstory.storyName}</h5>
-      <MDBBtn color="primary" size="sm" onClick={() => this.removeStory(userstory.idd)}>Delete</MDBBtn>
+      <h5>User Story:</h5>
+		  <h6>{userstory.storyName}</h6>
+      <MDBBtn color="danger" size="sm" onClick={() => this.removeStory(userstory.idd)}>Delete</MDBBtn>
       </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
-		  <MDBBtn color="primary" size="sm" onClick={() => this.toggleAndSet(userstory.id)}>+Task</MDBBtn>
+		  <h5>To Do: <MDBBtn color="primary" size="sm" onClick={() => this.toggleAndSet(userstory.id)}>+Task</MDBBtn></h5>
       <br/>
       <RowTasks tasks={renTasks.todo} storyID={userstory.id}/>
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "inprogress")}>
+      <h5>In Progress:</h5>
       <RowTasks tasks={renTasks.inprogress} storyID={userstory.id}/>
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "done")}>
+      <h5>Done:</h5>
       <RowTasks tasks={renTasks.done} storyID={userstory.id}/>
 		  </MDBCol>
       </MDBRow>
@@ -154,7 +157,7 @@ class Rows extends React.Component {
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-          <MDBBtn color="primary" onClick={this.handleSubmit}>Save changes</MDBBtn>
+          <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
 		</React.Fragment>
