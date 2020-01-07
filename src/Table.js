@@ -84,7 +84,7 @@ class Table extends React.Component {
     });
 
     return (
-      <MDBContainer className="table">
+      <React.Fragment>
         <h1 className="heading">PROJECT {this.props.project.projectName} <MDBBtn color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn></h1>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.props.project.idd} /></MDBCol>
@@ -103,7 +103,7 @@ class Table extends React.Component {
             <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
-      </MDBContainer>
+      </React.Fragment>
     );
   }
 }

@@ -93,7 +93,6 @@ class Releases extends React.Component {
 
     return (
     <React.Fragment>
-      <MDBContainer>
       <h5><MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add</MDBBtn> new Release</h5>
       {releases.map(release => (
         <React.Fragment>
@@ -108,7 +107,6 @@ class Releases extends React.Component {
         {this.state.selectedRelease === release.id ? <Sprints projectID={this.props.projectID} releaseID={this.state.selectedRelease} userstories={this.props.userstories} /> : null}
         </React.Fragment>
       ))}
-      </MDBContainer>
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Enter Release Version</MDBModalHeader>
         <MDBModalBody>

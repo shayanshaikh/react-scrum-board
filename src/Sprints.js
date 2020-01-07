@@ -75,22 +75,29 @@ class Sprints extends React.Component {
 
   render () {
     var sprints = [];
+    var i = 1;
     this.state.sprints.forEach ((s) => {
       if (this.props.projectID === s.projectID && this.props.releaseID === s.releaseID) {
-        sprints.push(s);
+        const newItem = {
+          id: s.id,
+          releaseID: s.releaseID,
+          projectID: s.projectID,
+          number: i
+        };
+        sprints.push(newItem);
+        i = i + 1;
       }
     });
 
     return (
       <React.Fragment>
-      <MDBContainer>
           <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.handleSubmit}>+Add</MDBBtn> new Sprint</h4>
           {sprints.map(sprint => ( 
             <React.Fragment>     
             <MDBContainer className="w-75">
             <MDBCard key={sprint.id} className="card">
             <MDBCardBody>
-            <MDBCardTitle>Sprint {sprint.id} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeSprint(sprint.id)}>×</MDBBtn></MDBCardTitle>
+            <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeSprint(sprint.id)}>×</MDBBtn></MDBCardTitle>
             <MDBCardText>
               {this.state.selectedSprint === sprint.id ? <MDBBtn color="warning" size="sm" onClick={this.closeSprint}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectSprint(sprint.id)}>Open</MDBBtn> }
             </MDBCardText>
@@ -100,7 +107,6 @@ class Sprints extends React.Component {
             {this.state.selectedSprint === sprint.id ? <Stories sprintID={this.state.selectedSprint} /> : null}
             </React.Fragment>
           ))}
-      </MDBContainer>
       </React.Fragment>
     );
   }
