@@ -88,11 +88,11 @@ class DOR extends React.Component {
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
-        <MDBCardText>{definition.definition} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeDOR(definition.id)}>×</MDBBtn></MDBCardText>
+        <MDBCardText>{definition.definition} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeDOR(definition.id)} }>×</MDBBtn></MDBCardText>
         </MDBCardBody>
         </MDBCard>
 		  ))}
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>Add DOR</MDBBtn>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOR</MDBBtn>
       </MDBCardText>
       </MDBCardBody>
       </MDBCard>

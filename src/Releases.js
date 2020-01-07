@@ -93,12 +93,12 @@ class Releases extends React.Component {
 
     return (
     <React.Fragment>
-      <h5><MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add</MDBBtn> new Release</h5>
+      <h5><MDBBtn color="primary" size="sm" onClick={this.toggle}>+New Release</MDBBtn></h5>
       {releases.map(release => (
         <React.Fragment>
         <MDBCard key={release.id} className="card">
         <MDBCardBody>
-        <MDBCardTitle>Release V{release.releaseV} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeRelease(release.id)}>×</MDBBtn></MDBCardTitle>
+        <MDBCardTitle>Release V{release.releaseV} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeRelease(release.id)} }>×</MDBBtn></MDBCardTitle>
         <MDBCardText>
           {this.state.selectedRelease === release.id ? <MDBBtn color="warning" size="sm" onClick={this.closeRelease}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectRelease(release.id)}>Open</MDBBtn> }
         </MDBCardText>

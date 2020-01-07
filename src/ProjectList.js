@@ -6,6 +6,7 @@ import 'mdbreact/dist/css/mdb.css';
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import Project from './Project';
 import * as serviceWorker from './serviceWorker';
 import withFirebaseAuth from 'react-with-firebase-auth';
@@ -94,20 +95,24 @@ class ProjectList extends React.Component {
     var signUp = <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseApp.auth()}/>;
 
     return (
-      <MDBContainer>
+      <React.Fragment>
         <Navbar user={this.props.user} signOut={this.props.signOut} signUp={signUp} signInWithGoogle={this.props.signInWithGoogle}/>
+        <MDBContainer>
         {
           (user && this.state.projectToggled)
             ? <React.Fragment>
               <h1 className="heading">Scrum Planning<br />Made Simple</h1>
               <h3 className="text-center" style={{marginBottom: 50}}>Welcome {user.displayName}</h3>
-              <h4>Create a New Project!<MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+</MDBBtn></h4>
+              <h4><MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+New Project</MDBBtn></h4>
               </React.Fragment>
             : null
         }
         { user ? 
           <MDBContainer><Project toggler={this.projtoggle} projects={this.state.projects} /></MDBContainer>
           : <MDBContainer><h1 className="heading">Scrum Made Simple (Beta)</h1><h2 className="heading">Please login above to use our beautiful services.</h2></MDBContainer> }
+        </MDBContainer>
+        <Footer />
+
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
           <MDBModalHeader toggle={this.toggle}>Enter Project Details</MDBModalHeader>
           <MDBModalBody>
@@ -118,7 +123,7 @@ class ProjectList extends React.Component {
             <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
-      </MDBContainer>
+      </React.Fragment>
     );
   }
 }

@@ -23,6 +23,13 @@ button.btn-danger.btn.Ripple-parent.deleteTask.btn-sm {
 	top: 0;
 	right: 0;
 }
+button.btn-danger.btn.Ripple-parent.deleteTask.task.btn-sm {
+	padding: .2rem .4rem;
+	margin: 0rem;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 
 .container.table {
 	margin: 2rem;
@@ -33,6 +40,22 @@ button.btn-danger.btn.Ripple-parent.deleteTask.btn-sm {
 	margin: 10rem;
 }
 
+.backlog {
+	text-align: center;
+	margin: 4rem;
+}
+
 .card {
 	margin: 1rem;
+}
+
+.break {
+	background-color: #666666;
+	height: 3px;
+	margin: 1px;
+	opacity: .8;
+}
+
+#footer {
+	margin-top: 6rem;
 }

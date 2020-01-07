@@ -91,13 +91,13 @@ class Sprints extends React.Component {
 
     return (
       <React.Fragment>
-          <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.handleSubmit}>+Add</MDBBtn> new Sprint</h4>
+          <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.handleSubmit}>+New Sprint</MDBBtn></h4>
           {sprints.map(sprint => ( 
             <React.Fragment>     
             <MDBContainer className="w-75">
             <MDBCard key={sprint.id} className="card">
             <MDBCardBody>
-            <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeSprint(sprint.id)}>×</MDBBtn></MDBCardTitle>
+            <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeSprint(sprint.id)} }>×</MDBBtn></MDBCardTitle>
             <MDBCardText>
               {this.state.selectedSprint === sprint.id ? <MDBBtn color="warning" size="sm" onClick={this.closeSprint}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectSprint(sprint.id)}>Open</MDBBtn> }
             </MDBCardText>

@@ -133,10 +133,10 @@ class Rows extends React.Component {
       <MDBCol md="3" className="border border-dark">
       <h5>User Story:</h5>
 		  <h6>{userstory.storyName}</h6>
-      <MDBBtn color="danger" size="sm" onClick={() => this.removeStory(userstory.idd)}>Delete</MDBBtn>
+      <MDBBtn color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>Delete</MDBBtn>
       </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
-		  <h5>To Do: <MDBBtn color="primary" size="sm" onClick={() => this.toggleAndSet(userstory.id)}>+Task</MDBBtn></h5>
+		  <h5>To Do: <MDBBtn color="primary" size="sm" onClick={() => this.toggleAndSet(userstory.id)}>+New Task</MDBBtn></h5>
       <br/>
       <RowTasks tasks={renTasks.todo} storyID={userstory.id}/>
 		  </MDBCol>

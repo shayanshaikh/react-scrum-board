@@ -86,11 +86,13 @@ class Table extends React.Component {
     return (
       <React.Fragment>
         <h1 className="heading">PROJECT {this.props.project.projectName} <MDBBtn color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn></h1>
+        <div className="m-5 break"></div>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.props.project.idd} /></MDBCol>
         <MDBCol md="4"><DOR projectID={this.props.project.idd} /></MDBCol>
         <MDBCol md="4"><DOD projectID={this.props.project.idd} /></MDBCol>
-        <h3 className="heading">Product Backlog</h3>
+        <MDBCol md="12"><div className="m-5 break"></div></MDBCol>
+        <MDBCol md="12"><h3 className="backlog">Product Backlog</h3></MDBCol>
         <MDBCol md="12"><Releases projectID={this.props.project.idd} userstories={projectStory} /></MDBCol>
         </MDBRow>
         <MDBModal isOpen={this.state.modal} toggle={this.toggle}>

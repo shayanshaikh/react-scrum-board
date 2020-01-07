@@ -78,7 +78,7 @@ class Stories extends React.Component {
 
     return (
       <React.Fragment>
-      <h4 className="w-75 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle}>+Add</MDBBtn> new User Stories</h4>
+      <h4 className="w-75 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle}>+New User Story</MDBBtn></h4>
       <MDBContainer className="table">
         <Rows userstories={projectStory} />
       </MDBContainer>

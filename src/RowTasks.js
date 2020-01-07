@@ -31,7 +31,7 @@ class RowTasks extends React.Component {
         <MDBCardBody>
         <MDBCardText>
           {task.taskName}<br/>
-          <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => this.removeTask(task.idd)}>×</MDBBtn>
+          <MDBBtn className="deleteTask task" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeTask(task.idd)} }>×</MDBBtn>
         </MDBCardText>
         </MDBCardBody>
         </MDBCard>

@@ -12,7 +12,6 @@ class Goals extends React.Component {
     this.state = {
       modal: false,
       goalName: '',
-      priority: '',
       goals: []
     }
   }
@@ -35,7 +34,6 @@ class Goals extends React.Component {
     }
     const newItem = {
       goalName: this.state.goalName,
-      priority: this.state.priority,
       projectID: this.props.projectID
     };
 
@@ -44,7 +42,6 @@ class Goals extends React.Component {
 
     this.setState(state => ({
       goalName: '',
-      priority: ''
     }));
     this.toggle();
   }
@@ -57,7 +54,6 @@ class Goals extends React.Component {
       for (let goal in goalList) {
         newState.push({
           id: goal,
-          priority: goalList[goal].priority,
           goalName: goalList[goal].goalName,
           projectID: goalList[goal].projectID
         });
@@ -68,8 +64,8 @@ class Goals extends React.Component {
     });
   }
 
-  removeStory(itemId) {
-    const itemRef = firebaseApp.database().ref(`/userstories/${itemId}`);
+  removeGoal(itemId) {
+    const itemRef = firebaseApp.database().ref(`/goals/${itemId}`);
     itemRef.remove();
   }
 
@@ -81,7 +77,7 @@ class Goals extends React.Component {
         goals.push(g);
       }
     });
-    var goalOrder = 1;
+
     return (
     <React.Fragment>
       <MDBContainer>
@@ -90,9 +86,13 @@ class Goals extends React.Component {
       <MDBCardTitle>High Level Goals</MDBCardTitle>
       <MDBCardText>
       {goals.map(goal => (
-        <h5 key={goal.id}>{goalOrder}) {goal.goalName}</h5>
+        <MDBCard key={goal.id} className="card">
+        <MDBCardBody>
+        <MDBCardText>{goal.goalName} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeGoal(goal.id)} }>×</MDBBtn></MDBCardText>
+        </MDBCardBody>
+        </MDBCard>
 		  ))}
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>Add High level goals</MDBBtn>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add HLG</MDBBtn>
       </MDBCardText>
       </MDBCardBody>
       </MDBCard>
@@ -100,7 +100,7 @@ class Goals extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Enter New Goal</MDBModalHeader>
         <MDBModalBody>
-          Goal: <MDBInput type="textarea" name="goalName" label="high level goal" onChange={this.handleInput}/>
+          Goal: <MDBInput type="text" name="goalName" label="high level goal" onChange={this.handleInput}/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
