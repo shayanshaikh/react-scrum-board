@@ -18,7 +18,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const bgPink = {backgroundColor: '#165fd9'}
+    const bgPink = {backgroundColor: '#2196f3'}
     return(
       <div>
         <Router>

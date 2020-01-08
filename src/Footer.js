@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <MDBFooter color="blue" id="footer" className="font-small pt-4">
       <MDBContainer fluid className="text-center text-md-left">
-        <MDBRow>
+        <MDBRow className="footerDesc">
           <MDBCol md="6">
             <h5 className="title">The Scrum Methodolgy</h5>
             <p>

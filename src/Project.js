@@ -125,7 +125,7 @@ class Project extends React.Component {
           projects.map(project => (
             <MDBCard key={project.id} className="card">
             <MDBCardBody>
-            <MDBCardTitle>Project {project.projectName}</MDBCardTitle>
+            <MDBCardTitle>Project: {project.projectName}</MDBCardTitle>
             <MDBCardText>
               <MDBBtn color="info" size="sm" onClick={() => this.openProject(project)}>Open</MDBBtn>
               <MDBBtn color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeProject(project.idd)} }>Delete</MDBBtn>
@@ -140,7 +140,7 @@ class Project extends React.Component {
           sharedProjects.map(project => (
             <MDBCard key={project.id} className="card">
             <MDBCardBody>
-            <MDBCardTitle>Project {project.projectName}</MDBCardTitle>
+            <MDBCardTitle>Project: {project.projectName}</MDBCardTitle>
             <MDBCardText>
               <MDBBtn color="info" size="sm" onClick={() => this.openProject(project)}>Open</MDBBtn>
             </MDBCardText>

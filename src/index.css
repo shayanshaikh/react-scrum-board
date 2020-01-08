@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #eeeeee !important;
 }
 
 code {
@@ -14,10 +15,21 @@ code {
 
 .border .border-dark {
 	padding: 1em;
+	min-height: 13rem;
+	background-color: #fafafa;
 }
 
 .scrumBoard {
 	margin: 2rem;
+}
+
+.footerDesc {
+	padding: 4rem 0rem 4rem 0rem;
+}
+
+.projectTitle {
+	margin:  10rem;
+	text-align: center;
 }
 
 button.btn-danger.btn.Ripple-parent.deleteTask.btn-sm {
@@ -40,9 +52,14 @@ button.btn-primary.btn.Ripple-parent.taskButton {
 	font-size: .32rem;
 }
 
- button.btn-warning.btn.Ripple-parent {
+button.btn-warning.btn.Ripple-parent {
  	color: black;
- }
+}
+
+button.btn-warning.btn.Ripple-parent.closing {
+	position: absolute;
+	right: 0;
+}
 
 .container.table {
 	margin: 2rem;
@@ -56,6 +73,10 @@ button.btn-primary.btn.Ripple-parent.taskButton {
 .backlog {
 	text-align: center;
 	margin: 4rem;
+}
+
+.userstory {
+	margin-top: 3rem;
 }
 
 .card {

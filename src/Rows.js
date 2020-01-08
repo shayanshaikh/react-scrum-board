@@ -136,7 +136,7 @@ class Rows extends React.Component {
       <MDBRow className="border border-dark" key={userstory.id}>
       <MDBCol md="3" className="border border-dark">
       <h5 className="colHeader">User Story {userstory.number}: <MDBBtn className="deleteTask" size="sm" color="danger" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>×</MDBBtn></h5>
-		  <h6>{userstory.storyName}</h6>
+		  <h6 className="userstory">{userstory.storyName}</h6>
       <div className="storyPoints">Story Points: {userstory.storyPoints}</div>
       </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
