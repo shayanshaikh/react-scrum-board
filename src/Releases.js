@@ -93,9 +93,12 @@ class Releases extends React.Component {
 
     return (
     <React.Fragment>
+      <MDBContainer>
       <h5><MDBBtn color="primary" size="sm" onClick={this.toggle}>+New Release</MDBBtn></h5>
+      </MDBContainer>
       {releases.map(release => (
         <React.Fragment>
+        <MDBContainer>
         <MDBCard key={release.id} className="card">
         <MDBCardBody>
         <MDBCardTitle>Release V{release.releaseV} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeRelease(release.id)} }>×</MDBBtn></MDBCardTitle>
@@ -104,13 +107,14 @@ class Releases extends React.Component {
         </MDBCardText>
         </MDBCardBody>
         </MDBCard>
+        </MDBContainer>
         {this.state.selectedRelease === release.id ? <Sprints projectID={this.props.projectID} releaseID={this.state.selectedRelease} userstories={this.props.userstories} /> : null}
         </React.Fragment>
       ))}
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Enter Release Version</MDBModalHeader>
         <MDBModalBody>
-          <MDBInput type="text" name="releaseV" label="Version No." onChange={this.handleInput}/>
+          <MDBInput type="text" name="releaseV" label="Version No." onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

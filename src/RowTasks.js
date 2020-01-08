@@ -30,7 +30,7 @@ class RowTasks extends React.Component {
         <MDBCard key={task.id} style={{margin:10}} onDragStart = {(e) => this.onDragStart(e, task.taskName)} draggable>
         <MDBCardBody>
         <MDBCardText>
-          {task.taskName}<br/>
+          {task.taskName}<br/>ETC: {task.taskPoints}
           <MDBBtn className="deleteTask task" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeTask(task.idd)} }>×</MDBBtn>
         </MDBCardText>
         </MDBCardBody>

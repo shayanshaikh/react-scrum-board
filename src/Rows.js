@@ -13,6 +13,7 @@ class Rows extends React.Component {
     this.state = {
       modal: false,
       taskName: '',
+      taskPoints: '',
       tasks: [],
       selectedStory: ''
     }
@@ -32,10 +33,8 @@ class Rows extends React.Component {
     });
   }
 
-  handleInput = (input) => {
-    this.setState({
-      taskName: input
-    })
+  handleInput = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = (e) => {
@@ -45,6 +44,7 @@ class Rows extends React.Component {
     }
     const newItem = {
       taskName: this.state.taskName,
+      taskPoints: this.state.taskPoints,
       id: Date.now(),
       category: "todo",
       storyID: this.state.selectedStory
@@ -54,7 +54,8 @@ class Rows extends React.Component {
     tasksRef.push(newItem);
 
     this.setState(state => ({
-      taskName: ''
+      taskName: '',
+      taskPoints: ''
     }));
     this.toggle();
   }
@@ -69,6 +70,7 @@ class Rows extends React.Component {
           idd: task,
           id: taskList[task].id,
           category: taskList[task].category,
+          taskPoints: taskList[task].taskPoints,
           taskName: taskList[task].taskName,
           storyID: taskList[task].storyID
         });
@@ -97,6 +99,7 @@ class Rows extends React.Component {
             taskName: task.taskName,
             id: task.id,
             category: cat,
+            taskPoints: task.taskPoints,
             storyID: task.storyID
           };
           
@@ -128,32 +131,35 @@ class Rows extends React.Component {
 
     return (
     <React.Fragment>
+      <div className="scrumBoard">
 		  {this.props.userstories.map(userstory => (
       <MDBRow className="border border-dark" key={userstory.id}>
       <MDBCol md="3" className="border border-dark">
-      <h5>User Story:</h5>
+      <h5 className="colHeader">User Story {userstory.number}: <MDBBtn className="deleteTask" size="sm" color="danger" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>×</MDBBtn></h5>
 		  <h6>{userstory.storyName}</h6>
-      <MDBBtn color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>Delete</MDBBtn>
+      <div className="storyPoints">Story Points: {userstory.storyPoints}</div>
       </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
-		  <h5>To Do: <MDBBtn color="primary" size="sm" onClick={() => this.toggleAndSet(userstory.id)}>+New Task</MDBBtn></h5>
+		  <h5 className="colHeader">To Do: <MDBBtn className="taskButton" color="primary" onClick={() => this.toggleAndSet(userstory.id)}>+New Task</MDBBtn></h5>
       <br/>
       <RowTasks tasks={renTasks.todo} storyID={userstory.id}/>
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "inprogress")}>
-      <h5>In Progress:</h5>
+      <h5 className="colHeader">In Progress:</h5>
       <RowTasks tasks={renTasks.inprogress} storyID={userstory.id}/>
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "done")}>
-      <h5>Done:</h5>
+      <h5 className="colHeader">Done:</h5>
       <RowTasks tasks={renTasks.done} storyID={userstory.id}/>
 		  </MDBCol>
       </MDBRow>
 		  ))}
+      </div>
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Create New Task</MDBModalHeader>
         <MDBModalBody>
-          Task: <MDBInput type="text" label="tasking" getValue={this.handleInput}/>
+          <MDBInput type="text" name="taskName" label="Task" onChange={this.handleInput} background outline/>
+          <MDBInput type="text" name="taskPoints" label="Time Estimate" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

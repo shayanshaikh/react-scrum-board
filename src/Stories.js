@@ -13,6 +13,7 @@ class Stories extends React.Component {
     this.state = {
       modal: false,
       storyName: '',
+      storyPoints: '',
       userstories: []
     }
   }
@@ -24,10 +25,8 @@ class Stories extends React.Component {
     });
   }
 
-  handleInput = (input) => {
-    this.setState({
-      storyName: input
-    })
+  handleInput = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = (e) => {
@@ -37,6 +36,7 @@ class Stories extends React.Component {
     }
     const newItem = {
       storyName: this.state.storyName,
+      storyPoints: this.state.storyPoints,
       sprintID: this.props.sprintID,
     };
 
@@ -44,7 +44,8 @@ class Stories extends React.Component {
     storiesRef.push(newItem);
 
     this.setState(state => ({
-      storyName: ''
+      storyName: '',
+      storyPoints: '',
     }));
     this.toggle();
   }
@@ -58,6 +59,7 @@ class Stories extends React.Component {
         newState.push({
           id: story,
           sprintID: stories[story].sprintID,
+          storyPoints: stories[story].storyPoints,
           storyName: stories[story].storyName
         });
       }
@@ -68,24 +70,31 @@ class Stories extends React.Component {
   }
 
   render () {
-    var projectStory = []
-
+    var projectStory = [];
+    var i = 1;
     this.state.userstories.forEach( (s)=> {
       if (s.sprintID === this.props.sprintID) {
-        projectStory.push(s);
+        const newItem = {
+          id: s.id,
+          sprintID: s.sprintID,
+          storyPoints: s.storyPoints,
+          storyName: s.storyName,
+          number: i
+        };
+        projectStory.push(newItem);
+        i = i + 1;
       }
     });
 
     return (
       <React.Fragment>
       <h4 className="w-75 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle}>+New User Story</MDBBtn></h4>
-      <MDBContainer className="table">
-        <Rows userstories={projectStory} />
-      </MDBContainer>
+      <Rows userstories={projectStory} />
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Create New User Story</MDBModalHeader>
         <MDBModalBody>
-          <MDBInput type="text" label="As a {user role} I want to..." getValue={this.handleInput} outline/>
+          <MDBInput type="text" name="storyName" label="As a {user role} I want to..." onChange={this.handleInput} background outline/>
+          <MDBInput type="text" name="storyPoints" label="Story Points" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

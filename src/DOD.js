@@ -85,6 +85,7 @@ class DOD extends React.Component {
       <MDBCardBody>
       <MDBCardTitle>Definition of Done</MDBCardTitle>
       <MDBCardText>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOD</MDBBtn>
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
@@ -92,7 +93,6 @@ class DOD extends React.Component {
         </MDBCardBody>
         </MDBCard>
       ))}
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOD</MDBBtn>
       </MDBCardText>
       </MDBCardBody>
       </MDBCard>
@@ -100,7 +100,7 @@ class DOD extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Enter New Definition of Done</MDBModalHeader>
         <MDBModalBody>
-          <MDBInput type="text" name="definition" label="Definition of Done" onChange={this.handleInput}/>
+          <MDBInput type="text" name="definition" label="Definition of Done" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

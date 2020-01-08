@@ -85,6 +85,7 @@ class DOR extends React.Component {
       <MDBCardBody>
       <MDBCardTitle>Definition of Ready</MDBCardTitle>
       <MDBCardText>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOR</MDBBtn>
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
@@ -92,7 +93,6 @@ class DOR extends React.Component {
         </MDBCardBody>
         </MDBCard>
 		  ))}
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOR</MDBBtn>
       </MDBCardText>
       </MDBCardBody>
       </MDBCard>
@@ -100,7 +100,7 @@ class DOR extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Enter New Definition of Ready</MDBModalHeader>
         <MDBModalBody>
-          <MDBInput type="text" name="definition" label="Definition of Ready" onChange={this.handleInput}/>
+          <MDBInput type="text" name="definition" label="Definition of Ready" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

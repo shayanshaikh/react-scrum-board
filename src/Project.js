@@ -117,8 +117,10 @@ class Project extends React.Component {
     });
 
     return (
+      <React.Fragment>
+        { this.state.showResults ? <Table toggler={this.closeProject} project={this.state.toggledProject} /> : null }
       <MDBContainer>
-        { this.state.showResults ? <Table toggler={this.closeProject} project={this.state.toggledProject} /> : <div className="m-5"><h4>Your Projects</h4><div className="break"></div></div> }
+        { this.state.showResults ? null : <div className="m-5"><h4>Your Projects</h4><div className="break"></div></div> }
         { this.state.showResults ? null :
           projects.map(project => (
             <MDBCard key={project.id} className="card">
@@ -158,6 +160,7 @@ class Project extends React.Component {
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>
+      </React.Fragment>
     );
   }
 }

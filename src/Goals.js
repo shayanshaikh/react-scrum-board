@@ -85,6 +85,7 @@ class Goals extends React.Component {
       <MDBCardBody>
       <MDBCardTitle>High Level Goals</MDBCardTitle>
       <MDBCardText>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add HLG</MDBBtn>
       {goals.map(goal => (
         <MDBCard key={goal.id} className="card">
         <MDBCardBody>
@@ -92,7 +93,6 @@ class Goals extends React.Component {
         </MDBCardBody>
         </MDBCard>
 		  ))}
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add HLG</MDBBtn>
       </MDBCardText>
       </MDBCardBody>
       </MDBCard>
@@ -100,7 +100,7 @@ class Goals extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
         <MDBModalHeader toggle={this.toggle}>Enter New Goal</MDBModalHeader>
         <MDBModalBody>
-          Goal: <MDBInput type="text" name="goalName" label="high level goal" onChange={this.handleInput}/>
+          Goal: <MDBInput type="text" name="goalName" label="High Level Goal" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
