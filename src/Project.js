@@ -5,6 +5,7 @@ import 'mdbreact/dist/css/mdb.css';
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
 import Table from './Table';
+import SharedUsers from './SharedUsers';
 import firebaseApp from './firebaseApp';
 
 class Project extends React.Component {
@@ -150,10 +151,11 @@ class Project extends React.Component {
           ))
         }
 
-        <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+        <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
           <MDBModalHeader toggle={this.toggle}>Share Project Access</MDBModalHeader>
           <MDBModalBody>
-            <MDBInput type="text" label="enter email to share" getValue={this.handleInput} outline/>
+            <MDBInput type="text" label="enter email to share" getValue={this.handleInput} background outline/>
+            <SharedUsers projectID={this.state.selectedProject} />
           </MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

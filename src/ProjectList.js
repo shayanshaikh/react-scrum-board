@@ -121,15 +121,15 @@ class ProjectList extends React.Component {
           : <MDBContainer>
             <h1 className="heading">Scrum Planning<br/>Made Simple (Beta)</h1>
             <h2 className="heading">Please login above to use our beautiful services.</h2>
-            <h2 className="scrumheading">Get</h2><img src={scrum1} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Your</h2><img src={scrum2} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Scrum</h2><img src={scrum3} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Ba</h2><img src={scrum4} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Duh</h2><img src={scrum5} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Da</h2><img src={scrum6} className="img-fluid" alt="" />
-            <h2 className="scrumheading">D</h2><img src={scrum7} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Doe</h2><img src={scrum8} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Dne</h2><img src={scrum9} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Join</h2><img src={scrum1} className="img-fluid" alt="" />
+            <h2 className="scrumheading">And</h2><img src={scrum2} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Get</h2><img src={scrum3} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Your</h2><img src={scrum4} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Scrum</h2><img src={scrum5} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Plan</h2><img src={scrum6} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Ba</h2><img src={scrum7} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Da</h2><img src={scrum8} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Duh</h2><img src={scrum9} className="img-fluid" alt="" />
             <h2 className="scrumheading">Done</h2><img src={scrum10} className="img-fluid" alt="" />
             </MDBContainer> }
         <Footer />
