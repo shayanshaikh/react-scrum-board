@@ -81,11 +81,11 @@ class Goals extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
-      { goals.length === 0 ? <h3 className="text-center">Looks like you have no high level goals try creating a new one.</h3> : null }
       <MDBCard>
       <MDBCardBody>
       <MDBCardTitle>High Level Goals</MDBCardTitle>
       <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New HLG</MDBBtn>
+      { goals.length === 0 ? <div className="emptyTitleM">Looks like you have no high level goals try creating a new one.</div> : null }
       {goals.map(goal => (
         <MDBCard key={goal.id} className="card">
         <MDBCardBody>

@@ -80,6 +80,12 @@ button.btn-warning.btn.Ripple-parent.btn-md {
 .emptyTitle {
 	text-align: center;
 	margin: 5rem;
+	color: darkred;
+}
+
+.emptyTitleM {
+	text-align: center;
+	color: darkred;
 }
 
 .container.table {

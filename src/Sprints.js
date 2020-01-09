@@ -149,6 +149,7 @@ class Sprints extends React.Component {
             <MDBModalHeader toggle={this.toggle}>Create a New Sprint</MDBModalHeader>
             <MDBModalBody>
               Here is where you will pick the goal you want to guide this sprint.
+              { goals.length === 0 ? <h5 className="emptyTitle">Looks like you have no goals try adding some goals first.</h5> : null }
               {goals.map(goal => (
                 <MDBCard key={goal.id} className="card">
                 <MDBCardBody>

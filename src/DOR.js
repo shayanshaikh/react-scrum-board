@@ -81,11 +81,11 @@ class DOR extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
-      { definitions.length === 0 ? <h3 className="text-center">Looks like you have no definitions of ready try creating a new one.</h3> : null }
       <MDBCard className="card">
       <MDBCardBody>
       <MDBCardTitle>Definitions of Ready</MDBCardTitle>
       <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New DOR</MDBBtn>
+      { definitions.length === 0 ? <div className="emptyTitleM">Looks like you have no definitions of ready try creating a new one.</div> : null }
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
