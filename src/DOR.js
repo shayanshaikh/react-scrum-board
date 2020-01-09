@@ -81,11 +81,11 @@ class DOR extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
+      { definitions.length === 0 ? <h3 className="text-center">Looks like you have no definitions of ready try creating a new one.</h3> : null }
       <MDBCard className="card">
       <MDBCardBody>
-      <MDBCardTitle>Definition of Ready</MDBCardTitle>
-      <MDBCardText>
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOR</MDBBtn>
+      <MDBCardTitle>Definitions of Ready</MDBCardTitle>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New DOR</MDBBtn>
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
@@ -93,13 +93,13 @@ class DOR extends React.Component {
         </MDBCardBody>
         </MDBCard>
 		  ))}
-      </MDBCardText>
       </MDBCardBody>
       </MDBCard>
       </MDBContainer>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Enter New Definition of Ready</MDBModalHeader>
         <MDBModalBody>
+          Here is where you will define the criteria that makes a user story ready to be worked on.
           <MDBInput type="text" name="definition" label="Definition of Ready" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>

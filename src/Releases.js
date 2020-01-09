@@ -94,12 +94,13 @@ class Releases extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
-      <h5><MDBBtn color="primary" size="sm" onClick={this.toggle}>+New Release</MDBBtn></h5>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New Release Plan</MDBBtn>
+      { releases.length === 0 ? <h3 className="emptyTitle">Looks like you have no release plans try creating a new one.</h3> : null }
       </MDBContainer>
       {releases.map(release => (
-        <React.Fragment>
+        <React.Fragment key={release.id}>
         <MDBContainer>
-        <MDBCard key={release.id} className="card">
+        <MDBCard className="card">
         <MDBCardBody>
         <MDBCardTitle>Release V{release.releaseV} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeRelease(release.id)} }>×</MDBBtn></MDBCardTitle>
         <MDBCardText>
@@ -111,9 +112,10 @@ class Releases extends React.Component {
         {this.state.selectedRelease === release.id ? <Sprints projectID={this.props.projectID} releaseID={this.state.selectedRelease} userstories={this.props.userstories} /> : null}
         </React.Fragment>
       ))}
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-        <MDBModalHeader toggle={this.toggle}>Enter Release Version</MDBModalHeader>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
+        <MDBModalHeader toggle={this.toggle}>Create a New Release</MDBModalHeader>
         <MDBModalBody>
+          To begin planning Sprints enter a release version number.
           <MDBInput type="text" name="releaseV" label="Version No." onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>

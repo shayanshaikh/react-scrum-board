@@ -39,7 +39,7 @@ class Rows extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.taskName.length) {
+    if (!this.state.taskName.length || !this.state.taskPoints.length) {
       return;
     }
     const newItem = {
@@ -124,14 +124,25 @@ class Rows extends React.Component {
       inprogress: [],
       done: []
     }
+    var haskTasks = false;
 
     this.state.tasks.forEach ((t) => {
       renTasks[t.category].push(t);
     });
 
+    this.props.userstories.forEach( (s)=> {
+      this.state.tasks.forEach( (t)=> {
+        if (t.storyID === s.id) {
+          haskTasks = true;
+        }
+      });
+    });
+
+
     return (
     <React.Fragment>
       <div className="scrumBoard">
+      { this.props.userstories.length === 0 ? <h3 className="emptyTitle">Looks like you have no userstories try creating a new one.</h3> : null }
 		  {this.props.userstories.map(userstory => (
       <MDBRow className="border border-dark" key={userstory.id}>
       <MDBCol md="3" className="border border-dark">
@@ -142,6 +153,7 @@ class Rows extends React.Component {
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
 		  <h5 className="colHeader">To Do: <MDBBtn className="taskButton" color="primary" onClick={() => this.toggleAndSet(userstory.id)}>+New Task</MDBBtn></h5>
       <br/>
+      { haskTasks ? null : <h3 className="text-center">Looks like you have no tasks yet try creating a new one.</h3>}
       <RowTasks tasks={renTasks.todo} storyID={userstory.id}/>
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "inprogress")}>
@@ -155,9 +167,10 @@ class Rows extends React.Component {
       </MDBRow>
 		  ))}
       </div>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-        <MDBModalHeader toggle={this.toggle}>Create New Task</MDBModalHeader>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
+        <MDBModalHeader toggle={this.toggle}>Create a New Task</MDBModalHeader>
         <MDBModalBody>
+          Describe a task that will help you achieve your user story. Then give a time estimate (make sure to play planning poker).
           <MDBInput type="text" name="taskName" label="Task" onChange={this.handleInput} background outline/>
           <MDBInput type="text" name="taskPoints" label="Time Estimate" onChange={this.handleInput} background outline/>
         </MDBModalBody>

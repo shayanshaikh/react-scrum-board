@@ -85,9 +85,9 @@ class Table extends React.Component {
 
     return (
       <React.Fragment>
-        <MDBContainer className="projectTitle"><MDBCard className="card"><MDBCardBody>
-          <MDBCardTitle><h1>{this.props.project.projectName} <MDBBtn className="closing" color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn></h1></MDBCardTitle>
-        </MDBCardBody></MDBCard></MDBContainer>
+        <MDBContainer><MDBRow className="d-flex justify-content-center projectTitle"><MDBCard className="card"><MDBCardBody>
+          <MDBCardTitle className="projectName">{this.props.project.projectName} <MDBBtn className="closing" color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn></MDBCardTitle>
+        </MDBCardBody></MDBCard></MDBRow></MDBContainer>
         <div className="m-5 break"></div>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.props.project.idd} /></MDBCol>
@@ -97,7 +97,7 @@ class Table extends React.Component {
         <MDBCol md="12"><h3 className="backlog">Product Backlog</h3></MDBCol>
         <MDBCol md="12"><Releases projectID={this.props.project.idd} userstories={projectStory} /></MDBCol>
         </MDBRow>
-        <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+        <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
           <MDBModalHeader toggle={this.toggle}>Create New User Story</MDBModalHeader>
           <MDBModalBody>
             <MDBInput type="text" label="As a {user role} I want to..." getValue={this.handleInput} outline/>

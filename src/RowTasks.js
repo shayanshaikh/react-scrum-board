@@ -12,9 +12,23 @@ class RowTasks extends React.Component {
     ev.dataTransfer.setData("id", id);
   }
 
-  removeTask(itemId) {
+  removeTask = (itemId) => {
     const itemRef = firebaseApp.database().ref(`/tasks/${itemId}`);
     itemRef.remove();
+  }
+
+  nextTodo = (itemId) => {
+    const itemRef = firebaseApp.database().ref(`/tasks/${itemId}`);
+    itemRef.update({
+      "category":"inprogress"
+    });
+  }
+
+  nextDone = (itemId) => {
+    const itemRef = firebaseApp.database().ref(`/tasks/${itemId}`);
+    itemRef.update({
+      "category":"done"
+    });
   }
 
   render () {
@@ -32,6 +46,8 @@ class RowTasks extends React.Component {
         <MDBCardText>
           {task.taskName}<br/>ETC: {task.taskPoints}
           <MDBBtn className="deleteTask task" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeTask(task.idd)} }>×</MDBBtn>
+          { task.category === "todo" ? <MDBBtn className="nextButton task" color="primary" size="sm" onClick={() => this.nextTodo(task.idd)}><i className="fas fa-chevron-right"></i></MDBBtn> : null }
+          { task.category === "inprogress" ? <MDBBtn className="nextButton task" color="primary" size="sm" onClick={() => this.nextDone(task.idd)}><i className="fas fa-chevron-right"></i></MDBBtn> : null }
         </MDBCardText>
         </MDBCardBody>
         </MDBCard>

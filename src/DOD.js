@@ -81,11 +81,11 @@ class DOD extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
+      { definitions.length === 0 ? <h3 className="text-center">Looks like you have no definitions of done try creating a new one.</h3> : null }
       <MDBCard className="card">
       <MDBCardBody>
-      <MDBCardTitle>Definition of Done</MDBCardTitle>
-      <MDBCardText>
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add DOD</MDBBtn>
+      <MDBCardTitle>Definitions of Done</MDBCardTitle>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New DOD</MDBBtn>
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
@@ -93,13 +93,13 @@ class DOD extends React.Component {
         </MDBCardBody>
         </MDBCard>
       ))}
-      </MDBCardText>
       </MDBCardBody>
       </MDBCard>
       </MDBContainer>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Enter New Definition of Done</MDBModalHeader>
         <MDBModalBody>
+          Here is where you will define the general criteria that makes a user story or final product ready to be delivered. 
           <MDBInput type="text" name="definition" label="Definition of Done" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>

@@ -81,11 +81,11 @@ class Goals extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
+      { goals.length === 0 ? <h3 className="text-center">Looks like you have no high level goals try creating a new one.</h3> : null }
       <MDBCard>
       <MDBCardBody>
       <MDBCardTitle>High Level Goals</MDBCardTitle>
-      <MDBCardText>
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Add HLG</MDBBtn>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New HLG</MDBBtn>
       {goals.map(goal => (
         <MDBCard key={goal.id} className="card">
         <MDBCardBody>
@@ -93,14 +93,14 @@ class Goals extends React.Component {
         </MDBCardBody>
         </MDBCard>
 		  ))}
-      </MDBCardText>
       </MDBCardBody>
       </MDBCard>
       </MDBContainer>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Enter New Goal</MDBModalHeader>
         <MDBModalBody>
-          Goal: <MDBInput type="text" name="goalName" label="High Level Goal" onChange={this.handleInput} background outline/>
+          Here is where you will add goals you want your project to fufill and later we will use a goal as guidance for our sprint.
+          <MDBInput type="text" name="goalName" label="High Level Goal" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

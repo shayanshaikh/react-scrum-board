@@ -14,6 +14,16 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseApp from './firebaseApp';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import scrum1 from './scrum1.png';
+import scrum2 from './scrum2.png';
+import scrum3 from './scrum3.png';
+import scrum4 from './scrum4.png';
+import scrum5 from './scrum5.png';
+import scrum6 from './scrum6.png';
+import scrum7 from './scrum7.png';
+import scrum8 from './scrum8.png';
+import scrum9 from './scrum9.png';
+import scrum10 from './scrum10.png';
 
 class ProjectList extends React.Component {
   constructor(props) {
@@ -100,7 +110,7 @@ class ProjectList extends React.Component {
         {
           (user && this.state.projectToggled)
             ? <MDBContainer>
-              <h1 className="heading">Scrum Planning<br />Made Simple</h1>
+              <h1 className="heading">Scrum Planning<br />Made Simple (Beta)</h1>
               <h3 className="text-center" style={{marginBottom: 50}}>Welcome {user.displayName}</h3>
               <h4><MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+New Project</MDBBtn></h4>
               </MDBContainer>
@@ -108,12 +118,26 @@ class ProjectList extends React.Component {
         }
         { user ? 
           <Project toggler={this.projtoggle} projects={this.state.projects} />
-          : <MDBContainer><h1 className="heading">Scrum Made Simple (Beta)</h1><h2 className="heading">Please login above to use our beautiful services.</h2></MDBContainer> }
+          : <MDBContainer>
+            <h1 className="heading">Scrum Planning<br/>Made Simple (Beta)</h1>
+            <h2 className="heading">Please login above to use our beautiful services.</h2>
+            <h2 className="scrumheading">Get</h2><img src={scrum1} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Your</h2><img src={scrum2} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Scrum</h2><img src={scrum3} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Ba</h2><img src={scrum4} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Duh</h2><img src={scrum5} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Da</h2><img src={scrum6} className="img-fluid" alt="" />
+            <h2 className="scrumheading">D</h2><img src={scrum7} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Doe</h2><img src={scrum8} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Dne</h2><img src={scrum9} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Done</h2><img src={scrum10} className="img-fluid" alt="" />
+            </MDBContainer> }
         <Footer />
 
-        <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-          <MDBModalHeader toggle={this.toggle}>Enter Project Details</MDBModalHeader>
+        <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
+          <MDBModalHeader toggle={this.toggle}>Create a New Project</MDBModalHeader>
           <MDBModalBody>
+            First step is to give your project a name.
             <MDBInput type="text" label="Project Name" getValue={this.handleInput} background outline/>
           </MDBModalBody>
           <MDBModalFooter>

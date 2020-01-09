@@ -120,6 +120,7 @@ class Project extends React.Component {
       <React.Fragment>
         { this.state.showResults ? <Table toggler={this.closeProject} project={this.state.toggledProject} /> : null }
       <MDBContainer>
+        { projects.length === 0 ? <h3 className="emptyTitle">Looks like you have no projects try creating a new one.</h3> : null }
         { this.state.showResults ? null : <div className="m-5"><h4>Your Projects</h4><div className="break"></div></div> }
         { this.state.showResults ? null :
           projects.map(project => (
@@ -128,14 +129,14 @@ class Project extends React.Component {
             <MDBCardTitle>Project: {project.projectName}</MDBCardTitle>
             <MDBCardText>
               <MDBBtn color="info" size="sm" onClick={() => this.openProject(project)}>Open</MDBBtn>
-              <MDBBtn color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeProject(project.idd)} }>Delete</MDBBtn>
               <MDBBtn color="secondary" size="sm" onClick={() => this.shareModal(project.idd)}>Share</MDBBtn>
+              <MDBBtn color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeProject(project.idd)} }>Delete</MDBBtn>
             </MDBCardText>
             </MDBCardBody>
             </MDBCard>
           ))
         }
-        { this.state.showResults ? null : <div className="m-5"><h4>Shared Projects</h4><div className="break"></div></div> }
+        { this.state.showResults ? null : <div className="m-5"><h4>Projects Shared with You</h4><div className="break"></div></div> }
         { this.state.showResults ? null :
           sharedProjects.map(project => (
             <MDBCard key={project.id} className="card">

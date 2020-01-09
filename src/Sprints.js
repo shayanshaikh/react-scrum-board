@@ -91,11 +91,12 @@ class Sprints extends React.Component {
 
     return (
       <React.Fragment>
-          <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.handleSubmit}>+New Sprint</MDBBtn></h4>
+          <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.handleSubmit}>+New Sprint Plan</MDBBtn></h4>
+          { sprints.length === 0 ? <h3 className="emptyTitle">Looks like you have no sprint plans try creating a new one.</h3> : null }
           {sprints.map(sprint => ( 
-            <React.Fragment>     
+            <React.Fragment key={sprint.id} >     
             <MDBContainer className="w-75">
-            <MDBCard key={sprint.id} className="card">
+            <MDBCard className="card">
             <MDBCardBody>
             <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeSprint(sprint.id)} }>×</MDBBtn></MDBCardTitle>
             <MDBCardText>

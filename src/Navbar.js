@@ -1,6 +1,7 @@
 import React from 'react';
 import { MDBContainer, MDBBtn, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
+import './index.css';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -18,12 +19,11 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const bgPink = {backgroundColor: '#2196f3'}
     return(
       <div>
         <Router>
           <header>
-            <MDBNavbar style={bgPink} dark expand="md" scrolling fixed="top">
+            <MDBNavbar className="navbar" dark expand="md" scrolling fixed="top">
               <MDBNavbarBrand href="/">
                   <strong>SCRUM BOARD (Beta)</strong>
               </MDBNavbarBrand>
