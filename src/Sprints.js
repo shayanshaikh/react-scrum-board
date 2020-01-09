@@ -104,6 +104,7 @@ class Sprints extends React.Component {
 
   render () {
     var sprints = [];
+    var takenGoals = [];
     var i = 1;
     this.state.sprints.forEach ((s) => {
       if (this.props.projectID === s.projectID && this.props.releaseID === s.releaseID) {
@@ -114,13 +115,19 @@ class Sprints extends React.Component {
           goal: s.goal,
           number: i
         };
+        if (s.goal.length !== 0) {
+          takenGoals.push(s.goal);
+        }
         sprints.push(newItem);
         i = i + 1;
       }
     });
     var goals = [];
     this.state.goals.forEach ((g) => {
-      if (this.props.projectID === g.projectID) {
+      var found = takenGoals.find(function(element) { 
+        return element === g.goalName; 
+      });
+      if (this.props.projectID === g.projectID && typeof found === "undefined") {
         goals.push(g);
       }
     });
