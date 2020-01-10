@@ -15,6 +15,7 @@ import 'firebase/auth';
 import firebaseApp from './firebaseApp';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import scrum1 from './scrum1.png';
+import scrum from './scrum.svg';
 import scrum2 from './scrum2.png';
 import scrum3 from './scrum3.png';
 import scrum4 from './scrum4.png';
@@ -109,17 +110,19 @@ class ProjectList extends React.Component {
         <Navbar user={this.props.user} signOut={this.props.signOut} signUp={signUp} signInWithGoogle={this.props.signInWithGoogle}/>
         {
           (user && this.state.projectToggled)
-            ? <MDBContainer>
-              <h1 className="heading">Scrum Planning<br />Made Simple (Beta)</h1>
-              <h3 className="text-center" style={{marginBottom: 50}}>Welcome {user.displayName}</h3>
-              <h4><MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+New Project</MDBBtn></h4>
-              </MDBContainer>
+            ? <React.Fragment>
+              <h1 className="heading">Scrum Planning<br />Made Simple (Beta)...</h1>
+              <h3 className="welcomeUser">Welcome {user.displayName}</h3>
+              <h4 className="text-center"><MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+New Project</MDBBtn></h4>
+              </React.Fragment>
             : null
         }
         { user ? 
           <Project toggler={this.projtoggle} projects={this.state.projects} />
-          : <MDBContainer>
-            <h1 className="heading">Scrum Planning<br/>Made Simple (Beta)</h1>
+          : <React.Fragment>
+            <div className="svgTitle"></div>
+            <MDBContainer>
+            <h1 className="heading"></h1>
             <h2 className="heading">Please login above to use our beautiful services.</h2>
             <h2 className="scrumheading">Join</h2><img src={scrum1} className="img-fluid" alt="" />
             <h2 className="scrumheading">And</h2><img src={scrum2} className="img-fluid" alt="" />
@@ -131,7 +134,8 @@ class ProjectList extends React.Component {
             <h2 className="scrumheading">Da</h2><img src={scrum8} className="img-fluid" alt="" />
             <h2 className="scrumheading">Duh</h2><img src={scrum9} className="img-fluid" alt="" />
             <h2 className="scrumheading">Done</h2><img src={scrum10} className="img-fluid" alt="" />
-            </MDBContainer> }
+            </MDBContainer>
+            </React.Fragment> }
         <Footer />
 
         <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>

@@ -33,6 +33,12 @@ class Sprints extends React.Component {
     });
   }
 
+  deselectGoal = () => {
+    this.setState({
+      selectedGoal: ''
+    });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     if (!this.state.selectedGoal.length) {
@@ -160,7 +166,7 @@ class Sprints extends React.Component {
               {goals.map(goal => (
                 <MDBCard key={goal.id} className="card">
                 <MDBCardBody>
-                <MDBCardText>{goal.goalName} <br/> { goal.goalName === this.state.selectedGoal ? <MDBBtn color="success" size="sm"><i className="fas fa-check"></i>Selected</MDBBtn> : <MDBBtn color="primary" size="sm" onClick={() => this.selectGoal(goal.goalName) }>Select</MDBBtn> }</MDBCardText>
+                <MDBCardText>{goal.goalName} <br/> { goal.goalName === this.state.selectedGoal ? <MDBBtn color="success" size="sm" onClick={this.deselectGoal}><i className="fas fa-check"></i>Selected</MDBBtn> : <MDBBtn color="primary" size="sm" onClick={() => this.selectGoal(goal.goalName) }>Select</MDBBtn> }</MDBCardText>
                 </MDBCardBody>
                 </MDBCard>
               ))}
