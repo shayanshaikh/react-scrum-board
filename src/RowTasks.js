@@ -41,7 +41,7 @@ class RowTasks extends React.Component {
     return (
     <React.Fragment>
       {storyTasks.map(task => (
-        <MDBCard key={task.id} style={{margin:10}} onDragStart = {(e) => this.onDragStart(e, task.taskName)} draggable>
+        <MDBCard className="task" key={task.id} onDragStart = {(e) => this.onDragStart(e, task.taskName)} draggable>
         <MDBCardBody>
         <MDBCardText>
           {task.taskName}<br/>ETC: {task.taskPoints}

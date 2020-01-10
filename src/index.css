@@ -61,6 +61,10 @@ code {
 	font-size: 4rem;
 }
 
+.task {
+	background-color: #fffa69!important;
+}
+
 button.btn-primary.btn.Ripple-parent.btn-sm.nextButton {
 	padding: .2rem .4rem;
 	margin: 0rem;
@@ -135,7 +139,6 @@ button.btn-primary.btn.Ripple-parent {
 }
 
 .userstory {
-	margin-top: 3rem;
 }
 
 .card {
