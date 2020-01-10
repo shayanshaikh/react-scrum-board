@@ -23,8 +23,6 @@ import scrum5 from './scrum5.png';
 import scrum6 from './scrum6.png';
 import scrum7 from './scrum7.png';
 import scrum8 from './scrum8.png';
-import scrum9 from './scrum9.png';
-import scrum10 from './scrum10.png';
 
 class ProjectList extends React.Component {
   constructor(props) {
@@ -125,15 +123,13 @@ class ProjectList extends React.Component {
             <h1 className="heading"></h1>
             <h2 className="heading">Please login above to use our beautiful services.</h2>
             <h2 className="scrumheading">Join</h2><img src={scrum1} className="img-fluid" alt="" />
-            <h2 className="scrumheading">And</h2><img src={scrum2} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Get</h2><img src={scrum3} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Your</h2><img src={scrum4} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Scrum</h2><img src={scrum5} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Plan</h2><img src={scrum6} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Ba</h2><img src={scrum7} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Da</h2><img src={scrum8} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Duh</h2><img src={scrum9} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Done</h2><img src={scrum10} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Now</h2><img src={scrum2} className="img-fluid" alt="" />
+            <h2 className="scrumheading">To</h2><img src={scrum3} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Get</h2><img src={scrum4} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Your</h2><img src={scrum5} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Scrum</h2><img src={scrum6} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Plan</h2><img src={scrum7} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Done</h2><img src={scrum8} className="img-fluid" alt="" />
             </MDBContainer>
             </React.Fragment> }
         <Footer />

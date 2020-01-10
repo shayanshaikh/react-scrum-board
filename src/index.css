@@ -61,8 +61,8 @@ code {
 	font-size: 4rem;
 }
 
-.task {
-	background-color: #fffa69!important;
+div.card.task {
+	background-color: #fffa69;
 }
 
 button.btn-primary.btn.Ripple-parent.btn-sm.nextButton {
