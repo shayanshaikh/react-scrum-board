@@ -2,6 +2,7 @@ import React from 'react';
 import { MDBContainer, MDBBtn, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
+import logo from './logo.svg';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class Navbar extends React.Component {
           <header>
             <MDBNavbar className="navbar" dark expand="md" scrolling fixed="top">
               <MDBNavbarBrand href="/">
-                  <strong>SCRUM BOARD (Beta)</strong>
+                  <img src={logo} className="contain" alt="" /><strong>(Beta)</strong>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={ this.onClick } />
               <MDBCollapse isOpen = { this.state.collapse } navbar>
