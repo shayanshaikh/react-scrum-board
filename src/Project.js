@@ -56,7 +56,6 @@ class Project extends React.Component {
     this.setState(state => ({
       sharedUser: ''
     }));
-    this.toggle();
   }
 
   componentDidMount() {

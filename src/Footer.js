@@ -7,13 +7,14 @@ const Footer = () => {
     <MDBFooter id="footer" className="font-small pt-4">
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow className="footerDesc">
-          <MDBCol md="6">
+          <MDBCol md="2"></MDBCol>
+          <MDBCol md="5">
             <h5 className="title">The Scrum Methodolgy</h5>
             <p>
               Here you can learn to use Scrum principles to manage and organize any project.
             </p>
           </MDBCol>
-          <MDBCol md="6">
+          <MDBCol md="5">
             <h5 className="title">Recommended Readings</h5>
             <ul>
               <li className="list-unstyled">

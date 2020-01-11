@@ -37,8 +37,7 @@ code {
 	background-position: center;	
 	height: 100vh;
 	width: 100vw;
-	margin-top: 10rem;
-	background-image: url('scrum.svg');
+	background-image: url('scrum66.svg');
 }
 
 .welcomeUser {
@@ -172,5 +171,7 @@ button.btn-primary.btn.Ripple-parent {
 
 #footer {
 	margin-top: 6rem;
-	background-color: #009245;
+	background-image: url('scrum77.svg');
+	background-position: bottom;
+	background-size: cover;
 }

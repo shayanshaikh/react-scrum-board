@@ -109,7 +109,7 @@ class ProjectList extends React.Component {
         {
           (user && this.state.projectToggled)
             ? <React.Fragment>
-              <h1 className="heading">Scrum Planning<br />Made Simple (Beta)...</h1>
+              <div className="svgTitle"></div>
               <h3 className="welcomeUser">Welcome {user.displayName}</h3>
               <h4 className="text-center"><MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+New Project</MDBBtn></h4>
               </React.Fragment>
