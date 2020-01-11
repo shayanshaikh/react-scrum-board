@@ -99,7 +99,7 @@ class DOR extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Enter New Definition of Ready</MDBModalHeader>
         <MDBModalBody>
-          Here is where you will define the criteria that makes a user story ready to be worked on.
+          Here is where you will define the criteria that a user story must pass before it is ready to be put into production.
           <MDBInput type="text" name="definition" label="Definition of Ready" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>

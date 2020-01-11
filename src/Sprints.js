@@ -16,6 +16,7 @@ class Sprints extends React.Component {
       sprints: [],
       goals: [],
       selectedGoal: '',
+      dueDate: '',
       selectedSprint: ''
     }
   }
@@ -39,14 +40,19 @@ class Sprints extends React.Component {
     });
   }
 
+  handleInput = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.selectedGoal.length) {
+    if (!this.state.selectedGoal.length || !this.state.dueDate.length) {
       return;
     }
     const newItem = {
       releaseID: this.props.releaseID,
       projectID: this.props.projectID,
+      dueDate: this.state.dueDate,
       goal: this.state.selectedGoal
     };
 
@@ -65,6 +71,7 @@ class Sprints extends React.Component {
         newState.push({
           id: sprint,
           releaseID: sprintsList[sprint].releaseID,
+          dueDate: sprintsList[sprint].dueDate,
           projectID: sprintsList[sprint].projectID,
           goal: sprintsList[sprint].goal
         });
@@ -118,6 +125,7 @@ class Sprints extends React.Component {
           id: s.id,
           releaseID: s.releaseID,
           projectID: s.projectID,
+          dueDate: s.dueDate,
           goal: s.goal,
           number: i
         };
@@ -150,6 +158,7 @@ class Sprints extends React.Component {
             <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeSprint(sprint.id)} }>×</MDBBtn></MDBCardTitle>
             <MDBCardText>
               Goal: {sprint.goal} <br/>
+              Sprint Completion Date: {sprint.dueDate}<br/>
               {this.state.selectedSprint === sprint.id ? <MDBBtn color="warning" size="sm" onClick={this.closeSprint}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectSprint(sprint.id)}>Open</MDBBtn> }
             </MDBCardText>
             </MDBCardBody>
@@ -161,15 +170,16 @@ class Sprints extends React.Component {
           <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
             <MDBModalHeader toggle={this.toggle}>Create a New Sprint</MDBModalHeader>
             <MDBModalBody>
-              Here is where you will pick the goal you want to guide this sprint.
+              Here is where you will pick the goal you want to guide this sprint and set the completion date.
               { goals.length === 0 ? <h5 className="emptyTitle">Looks like you have no goals try adding some goals first.</h5> : null }
               {goals.map(goal => (
                 <MDBCard key={goal.id} className="card">
                 <MDBCardBody>
-                <MDBCardText>{goal.goalName} <br/> { goal.goalName === this.state.selectedGoal ? <MDBBtn color="success" size="sm" onClick={this.deselectGoal}><i className="fas fa-check"></i>Selected</MDBBtn> : <MDBBtn color="primary" size="sm" onClick={() => this.selectGoal(goal.goalName) }>Select</MDBBtn> }</MDBCardText>
+                <MDBCardText>{goal.goalName} <br/> { goal.goalName === this.state.selectedGoal ? <MDBBtn color="success" size="sm" onClick={this.deselectGoal}><i className="fas fa-check"></i>Selected</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectGoal(goal.goalName) }>Select</MDBBtn> }</MDBCardText>
                 </MDBCardBody>
                 </MDBCard>
               ))}
+              <MDBInput type="text" name="dueDate" label="Sprint Completion Date" onChange={this.handleInput} background outline/>
             </MDBModalBody>
             <MDBModalFooter>
               <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>

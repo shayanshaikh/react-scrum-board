@@ -14,6 +14,7 @@ class Releases extends React.Component {
       modal: false,
       releaseV: '',
       selectedRelease: '',
+      dueDate: '',
       releases: []
     }
   }
@@ -37,11 +38,12 @@ class Releases extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.releaseV.length) {
+    if (!this.state.releaseV.length || !this.state.dueDate.length) {
       return;
     }
     const newItem = {
       releaseV: this.state.releaseV,
+      dueDate: this.state.dueDate,
       projectID: this.props.projectID
     };
 
@@ -49,7 +51,8 @@ class Releases extends React.Component {
     releasesRef.push(newItem);
 
     this.setState(state => ({
-      releaseV: ''
+      releaseV: '',
+      dueDate: ''
     }));
     this.toggle();
   }
@@ -63,6 +66,7 @@ class Releases extends React.Component {
         newState.push({
           id: release,
           releaseV: releasesList[release].releaseV,
+          dueDate: releasesList[release].dueDate,
           projectID: releasesList[release].projectID
         });
       }
@@ -104,6 +108,7 @@ class Releases extends React.Component {
         <MDBCardBody>
         <MDBCardTitle>Release V{release.releaseV} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeRelease(release.id)} }>×</MDBBtn></MDBCardTitle>
         <MDBCardText>
+          Release Date: {release.dueDate}<br/>
           {this.state.selectedRelease === release.id ? <MDBBtn color="warning" size="sm" onClick={this.closeRelease}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectRelease(release.id)}>Open</MDBBtn> }
         </MDBCardText>
         </MDBCardBody>
@@ -115,8 +120,9 @@ class Releases extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Create a New Release</MDBModalHeader>
         <MDBModalBody>
-          To begin planning Sprints enter a release version number.
+          To begin planning Sprints enter a release version number and release date.
           <MDBInput type="text" name="releaseV" label="Version No." onChange={this.handleInput} background outline/>
+          <MDBInput type="text" name="dueDate" label="Release Date" onChange={this.handleInput} background outline/>
         </MDBModalBody>
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
