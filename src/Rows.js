@@ -5,6 +5,7 @@ import 'mdbreact/dist/css/mdb.css';
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
 import RowTasks from './RowTasks';
+import AcceptanceCriteria from './AcceptanceCriteria';
 import firebaseApp from './firebaseApp';
 
 class Rows extends React.Component {
@@ -147,10 +148,11 @@ class Rows extends React.Component {
       <MDBRow className="border border-dark" key={userstory.id}>
       <MDBCol md="3" className="border border-dark">
       <h5 className="colHeader">User Story {userstory.number}: <MDBBtn className="deleteTask" size="sm" color="danger" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>×</MDBBtn></h5>
-		  <MDBCard className="task"><MDBCardBody><MDBCardText>
+		  <MDBCard className="task"><MDBCardBody>
       <div className="userstory">{userstory.storyName}</div>
       <div className="storyPoints">Story Points: {userstory.storyPoints}</div>
-      </MDBCardText></MDBCardBody></MDBCard>
+      </MDBCardBody></MDBCard>
+      <AcceptanceCriteria storyID={userstory.id}/>
       </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
 		  <h5 className="colHeader">To Do: <MDBBtn className="taskButton" color="primary" onClick={() => this.toggleAndSet(userstory.id)}>+New Task</MDBBtn></h5>
