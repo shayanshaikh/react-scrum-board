@@ -43,12 +43,12 @@ class RowTasks extends React.Component {
       {storyTasks.map(task => (
         <MDBCard className="task" key={task.id} onDragStart = {(e) => this.onDragStart(e, task.taskName)} draggable>
         <MDBCardBody>
-        <MDBCardText>
+        <div className="taskDesc">
           {task.taskName}<br/>ETC: {task.taskPoints}
           <MDBBtn className="deleteTask task" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeTask(task.idd)} }>×</MDBBtn>
           { task.category === "todo" ? <MDBBtn className="nextButton task" color="primary" size="sm" onClick={() => this.nextTodo(task.idd)}><i className="fas fa-chevron-right"></i></MDBBtn> : null }
           { task.category === "inprogress" ? <MDBBtn className="nextButton task" color="primary" size="sm" onClick={() => this.nextDone(task.idd)}><i className="fas fa-chevron-right"></i></MDBBtn> : null }
-        </MDBCardText>
+        </div>
         </MDBCardBody>
         </MDBCard>
     ))}

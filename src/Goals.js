@@ -89,7 +89,7 @@ class Goals extends React.Component {
       {goals.map(goal => (
         <MDBCard key={goal.id} className="card">
         <MDBCardBody>
-        <MDBCardText>{goal.goalName} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeGoal(goal.id)} }>×</MDBBtn></MDBCardText>
+        {goal.goalName} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeGoal(goal.id)} }>×</MDBBtn>
         </MDBCardBody>
         </MDBCard>
 		  ))}

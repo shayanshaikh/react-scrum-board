@@ -156,8 +156,8 @@ class Sprints extends React.Component {
             <MDBCard className="card">
             <MDBCardBody>
             <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeSprint(sprint.id)} }>×</MDBBtn></MDBCardTitle>
+            Goal: {sprint.goal} <br/>
             <MDBCardText>
-              Goal: {sprint.goal} <br/>
               Sprint Completion Date: {sprint.dueDate}<br/>
               {this.state.selectedSprint === sprint.id ? <MDBBtn color="warning" size="sm" onClick={this.closeSprint}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectSprint(sprint.id)}>Open</MDBBtn> }
             </MDBCardText>

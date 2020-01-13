@@ -26,7 +26,12 @@ code {
 .border .border-dark {
 	padding: 1em;
 	min-height: 13rem;
-	background-color: #f0f0f0;
+	background-color: white;
+  border-color: #009245 !important;
+}
+
+div.row.border {
+  border-color: #009245 !important;
 }
 
 .modal-content {
@@ -183,11 +188,16 @@ button.btn-warning.btn.Ripple-parent {
 
 .storyPoints {
 	font-size: .9rem;
-	margin: .25rem 0rem 1rem 6rem;
+}
+
+.taskDesc {
+  font-size: .9rem;
 }
 
 .colHeader {
-	background-color: rgba(40,40,40,.2);
+	background-color: rgba(0,0,0,.1);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  color: black;
 	margin-right: -15px;
 	margin-top: -15px;
 	margin-left: -15px;
