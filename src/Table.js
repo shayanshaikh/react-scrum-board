@@ -85,9 +85,8 @@ class Table extends React.Component {
 
     return (
       <React.Fragment>
-        <MDBContainer><MDBRow className="d-flex justify-content-center projectTitle"><MDBCard className="card"><MDBCardBody>
-          <MDBCardTitle className="projectName">{this.props.project.projectName} <MDBBtn className="closing" color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn></MDBCardTitle>
-        </MDBCardBody></MDBCard></MDBRow></MDBContainer>
+        <MDBContainer><MDBRow className="d-flex justify-content-center heading"><div className="chalk">{this.props.project.projectName}</div> <MDBBtn className="closing" color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn>
+        </MDBRow></MDBContainer>
         <div className="m-5 break"></div>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.props.project.idd} /></MDBCol>

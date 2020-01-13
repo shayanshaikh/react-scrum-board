@@ -3,9 +3,17 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  color: white !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee !important;
+  background-color: #009245 !important;
+  border-left: 1rem solid #cc9966;
+  border-right: 1rem solid #cc9966;
+}
+
+@font-face {
+    font-family: "Chalkduster";
+    src: url("Chalkduster.ttf") format("truetype");
 }
 
 code {
@@ -16,7 +24,11 @@ code {
 .border .border-dark {
 	padding: 1em;
 	min-height: 13rem;
-	background-color: #fafafa;
+	background-color: #f0f0f0;
+}
+
+.modal-content {
+	color: black;
 }
 
 .scrumBoard {
@@ -46,6 +58,20 @@ code {
 	height: 100vh;
 	width: 100vw;
 	background-image: url('scrumB.svg');
+}
+
+.footsvg {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-image: url('Asset 2.svg');
+}
+
+.footsvg2 {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-image: url('Asset 3.svg');
 }
 
 .welcomeUser {
@@ -104,13 +130,7 @@ button.btn-warning.btn.Ripple-parent {
  	color: black;
 }
 
-button.btn-info.btn.Ripple-parent {
- 	background-color: #4285f4!important;
-}
 
-button.btn-primary.btn.Ripple-parent {
- 	background-color: #009245!important;
-}
 
 .emptyTitle {
 	text-align: center;
@@ -129,8 +149,13 @@ button.btn-primary.btn.Ripple-parent {
 
 .heading {
 	text-align: center;
-	margin-top: 10rem;
+	padding-top: 10rem;
 	margin-bottom: 10rem;
+}
+
+.chalk {
+	font-family: 'Chalkduster';
+	font-size: 4rem;
 }
 
 .scrumheading {
@@ -150,11 +175,25 @@ button.btn-primary.btn.Ripple-parent {
 
 .card {
 	margin: 1rem;
+	color: black;
 }
 
 .navbar {
-	background-size: cover;
-	background-image: url('scrumN.svg');
+	background-color: #009245;
+	border-top: 1rem inset #cc9966;
+	border-left: 1rem solid #cc9966;
+	border-right: 1rem solid #cc9966;
+}
+
+.container-fluid.text-center.text-md-left {
+	border-bottom: 1rem outset #cc9966;
+	border-left: 1rem solid #cc9966;
+	border-right: 1rem solid #cc9966;
+	margin-top: -1.5rem;
+}
+
+.footer-copyright.text-center.py-3 {
+	background-color: #a37b52;
 }
 
 .storyPoints {
@@ -163,7 +202,7 @@ button.btn-primary.btn.Ripple-parent {
 }
 
 .colHeader {
-	background-color: #f0f0f0;
+	background-color: rgba(40,40,40,.2);
 	margin-right: -15px;
 	margin-top: -15px;
 	margin-left: -15px;
@@ -172,15 +211,15 @@ button.btn-primary.btn.Ripple-parent {
 }
 
 .break {
-	background-color: #666666;
+	background-color: white;
 	height: 3px;
 	margin: 1px;
 	opacity: .8;
 }
 
 #footer {
+	margin-left: -1rem;
+	margin-right: -1rem;
 	margin-top: 6rem;
-	background-image: url('scrum77.svg');
-	background-position: bottom;
-	background-size: cover;
+	background-color: #009245 !important;
 }

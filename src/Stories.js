@@ -93,7 +93,7 @@ class Stories extends React.Component {
       <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Create a New User Story</MDBModalHeader>
         <MDBModalBody>
-          Recall that a user story should take the form, <div className="text-center">As a [user role], I want [goal] so that [reason]</div> and should meet the "INVEST" criteria (independent, negotiable, valuable, estimatable, sized appropriately, and testable).<br/>Then assess the difficulty of the user story and assign a story point value. 
+          Recall that a user story should take the form, <br/><br/><div className="text-center">As a [user role], I want [goal] so that [reason]</div><br/> and should meet the "INVEST" criteria (independent, negotiable, valuable, estimatable, sized appropriately, and testable).<br/>Then assess the difficulty of the user story and assign a story point value. 
           <MDBInput type="text" name="storyName" label="As a {user role} I want to..." onChange={this.handleInput} background outline/>
           <MDBInput type="text" name="storyPoints" label="Story Points" onChange={this.handleInput} background outline/>
         </MDBModalBody>

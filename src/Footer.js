@@ -1,20 +1,22 @@
 import React from "react";
 import './index.css';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import asset from './Asset 3.svg'
 
 const Footer = () => {
   return (
     <MDBFooter id="footer" className="font-small pt-4">
       <MDBContainer fluid className="text-center text-md-left">
-        <MDBRow className="footerDesc">
-          <MDBCol md="2"></MDBCol>
-          <MDBCol md="5">
+        <MDBRow>
+          <MDBCol md="12"><div className="break"></div></MDBCol>
+          <MDBCol md="3" className="footsvg"></MDBCol>
+          <MDBCol md="4" className="footerDesc">
             <h5 className="title">The Scrum Methodolgy</h5>
             <p>
               Here you can learn to use Scrum principles to manage and organize any project.
             </p>
           </MDBCol>
-          <MDBCol md="5">
+          <MDBCol md="3" className="footerDesc">
             <h5 className="title">Recommended Readings</h5>
             <ul>
               <li className="list-unstyled">
@@ -31,6 +33,7 @@ const Footer = () => {
               </li>
             </ul>
           </MDBCol>
+          <MDBCol md="2" className="footsvg2"></MDBCol>
         </MDBRow>
       </MDBContainer>
       <div className="footer-copyright text-center py-3">
