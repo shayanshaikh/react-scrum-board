@@ -6,6 +6,7 @@ import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFoote
 import './index.css';
 import firebaseApp from './firebaseApp';
 import Sprints from './Sprints';
+import Modal from './Modal';
 
 class Releases extends React.Component {
   constructor(props) {
@@ -15,8 +16,44 @@ class Releases extends React.Component {
       releaseV: '',
       selectedRelease: '',
       dueDate: '',
-      releases: []
+      releases: [],
+      edit_modal: false,
+      edit_id: ''
     }
+  }
+
+  edit_toggle = () => {
+    this.setState({
+      edit_modal: !this.state.edit_modal,
+      releaseV: '',
+      dueDate: ''
+    });
+  }
+
+  handleEdit = (itemId) => {
+    if (!this.state.releaseV.length || !this.state.dueDate.length) {
+      return;
+    }
+
+    const itemRef = firebaseApp.database().ref(`/releases/${itemId}`);
+    itemRef.update({releaseV: this.state.releaseV, dueDate: this.state.dueDate});
+
+    this.edit_toggle();
+  }
+
+  update = (itemId) => {
+    const itemRef = firebaseApp.database().ref(`/releases/${itemId}`);
+    itemRef.on('value', (snapshot) => {
+      if (snapshot && snapshot.exists()) {
+        let task = snapshot.val();
+        this.setState({
+          releaseV: task.releaseV,
+          dueDate: task.dueDate,
+          edit_id: itemId,
+          edit_modal: !this.state.edit_modal
+        });
+      }
+    });
   }
     
 
@@ -98,7 +135,7 @@ class Releases extends React.Component {
     return (
     <React.Fragment>
       <MDBContainer>
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New Release Plan</MDBBtn>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New Release Plan</MDBBtn>
       { releases.length === 0 ? <h3 className="emptyTitle">Looks like you have no release plans try creating a new one.</h3> : null }
       </MDBContainer>
       {releases.map(release => (
@@ -106,7 +143,11 @@ class Releases extends React.Component {
         <MDBContainer>
         <MDBCard className="card">
         <MDBCardBody>
-        <MDBCardTitle>Release V{release.releaseV} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeRelease(release.id)} }>×</MDBBtn></MDBCardTitle>
+        <MDBCardTitle>
+        Release V{release.releaseV} 
+        <MDBBtn className="editTask" color="indigo" size="sm" onClick={()=>{this.update(release.id)}}><i className="fas fa-edit"></i></MDBBtn>
+        <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeRelease(release.id)} }>×</MDBBtn>
+        </MDBCardTitle>
         <MDBCardText>
           Release Date: {release.dueDate}<br/>
           {this.state.selectedRelease === release.id ? <MDBBtn color="warning" size="sm" onClick={this.closeRelease}>Close</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectRelease(release.id)}>Open</MDBBtn> }
@@ -114,21 +155,40 @@ class Releases extends React.Component {
         </MDBCardBody>
         </MDBCard>
         </MDBContainer>
-        {this.state.selectedRelease === release.id ? <Sprints projectID={this.props.projectID} releaseID={this.state.selectedRelease} userstories={this.props.userstories} /> : null}
+        {this.state.selectedRelease === release.id ? <Sprints user={this.props.user} projectID={this.props.projectID} releaseID={this.state.selectedRelease} userstories={this.props.userstories} /> : null}
         </React.Fragment>
       ))}
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
-        <MDBModalHeader toggle={this.toggle}>Create a New Release</MDBModalHeader>
-        <MDBModalBody>
-          To begin planning Sprints enter a release version number and release date.
-          <MDBInput type="text" name="releaseV" label="Version No." onChange={this.handleInput} background outline/>
-          <MDBInput type="text" name="dueDate" label="Release Date" onChange={this.handleInput} background outline/>
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-          <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
-        </MDBModalFooter>
-      </MDBModal>
+      <Modal
+        title="Editing Release"
+        button_title="Update"
+        input_name="releaseV"
+        input_name2="dueDate"
+        input_label="Version No."
+        input_label2="Release Date"
+        handleInput={this.handleInput}
+        input_value={this.state.releaseV}
+        input_value2={this.state.dueDate}
+        toggle={this.edit_toggle}
+        modal={this.state.edit_modal}
+        handleEdit={this.handleEdit}
+        second_input={true}
+        status="edit"
+        edit_id={this.state.edit_id}
+      />
+      <Modal
+        title="Create a New Release"
+        button_title="Submit"
+        modal_message="To begin planning Sprints enter a release version number and release date."
+        input_name="releaseV"
+        input_name2="dueDate"
+        input_label="Version No."
+        input_label2="Release Date"
+        handleInput={this.handleInput}
+        toggle={this.toggle}
+        modal={this.state.modal}
+        handleSubmit={this.handleSubmit}
+        second_input={true}
+      />
 		</React.Fragment>
     );
   }

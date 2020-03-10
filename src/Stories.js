@@ -14,8 +14,44 @@ class Stories extends React.Component {
       modal: false,
       storyName: '',
       storyPoints: '',
-      userstories: []
+      userstories: [],
+      edit_modal: false,
+      edit_id: ''
     }
+  }
+
+  edit_toggle = () => {
+    this.setState({
+      edit_modal: !this.state.edit_modal,
+      storyName: '',
+      storyPoints: ''
+    });
+  }
+
+  handleEdit = (itemId) => {
+    if (!this.state.storyName.length || !this.state.storyPoints.length) {
+      return;
+    }
+
+    const itemRef = firebaseApp.database().ref(`/userstories/${itemId}`);
+    itemRef.update({storyName: this.state.storyName, storyPoints: this.state.storyPoints});
+
+    this.edit_toggle();
+  }
+
+  update = (itemId) => {
+    const itemRef = firebaseApp.database().ref(`/userstories/${itemId}`);
+    itemRef.on('value', (snapshot) => {
+    	if (snapshot && snapshot.exists()) {
+	      let task = snapshot.val();
+	      this.setState({
+	        storyName: task.storyName,
+	        storyPoints: task.storyPoints,
+	        edit_id: itemId,
+	        edit_modal: !this.state.edit_modal
+	      });
+	  	}
+    });
   }
     
 
@@ -88,8 +124,19 @@ class Stories extends React.Component {
 
     return (
       <React.Fragment>
-      <h4 className="w-75 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle}>+New User Story</MDBBtn></h4>
-      <Rows userstories={projectStory} />
+      <h4 className="w-75 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New User Story</MDBBtn></h4>
+      <Rows 
+      	user={this.props.user}
+      	userstories={projectStory} 
+      	update={this.update}
+      	handleInput={this.handleInput}
+        input_value={this.state.storyName}
+        input_value2={this.state.storyPoints}
+        toggle={this.edit_toggle}
+        modal={this.state.edit_modal}
+        handleEdit={this.handleEdit}
+        edit_id={this.state.edit_id}
+      />
       <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Create a New User Story</MDBModalHeader>
         <MDBModalBody>

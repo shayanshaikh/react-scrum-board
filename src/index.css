@@ -15,7 +15,8 @@ body {
 
 @font-face {
     font-family: "Chalkduster";
-    src: url("Chalkduster.ttf") format("truetype");
+    src: url("assets/Chalkduster.ttf") format("truetype");
+    font-display: swap;
 }
 
 code {
@@ -54,14 +55,14 @@ div.row.border {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: bottom;
-	background-image: url('Asset 2.svg');
+	background-image: url('assets/Asset 2.svg');
 }
 
 .footsvg2 {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: bottom;
-	background-image: url('Asset 3.svg');
+	background-image: url('assets/Asset 3.svg');
 }
 
 .welcomeUser {
@@ -96,9 +97,23 @@ button.btn-primary.btn.Ripple-parent.btn-sm.nextButton {
 	right: 0;
 }
 
+button.btn-indigo.btn.Ripple-parent.editTask.btn-sm {
+  padding: .2rem .3rem;
+  margin: .1rem;
+  position: absolute;
+  top: 0;
+  right: 1.3rem;
+}
+button.btn-indigo.btn.Ripple-parent.editTask.task.btn-sm {
+  padding: .2rem .3rem;
+  margin: 0rem;
+  position: absolute;
+  top: 0;
+  right: 1.3rem;
+}
 button.btn-danger.btn.Ripple-parent.deleteTask.btn-sm {
 	padding: .2rem .4rem;
-	margin: .2rem;
+	margin: .1rem;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -205,11 +220,45 @@ button.btn-warning.btn.Ripple-parent {
 	padding: 5px;
 }
 
+.standtimer {
+  color: darkred;
+}
+
+.standgif {
+  height: 5rem;
+}
+
+.standgif2 {
+  height: 5rem;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.standgif3 {
+  height: 3rem;
+}
+
+button.btn-default.btn.Ripple-parent.standup {
+  background-color: transparent !important;
+}
+
 .break {
 	background-color: white;
 	height: 3px;
 	margin: 1px;
 	opacity: .8;
+}
+
+.projectTimer {
+
+}
+
+.underline-hover:hover, .underline-hover:focus {
+  text-decoration: underline;
+}
+
+.footertitle {
+  text-decoration: underline;
 }
 
 #footer {
@@ -218,3 +267,5 @@ button.btn-warning.btn.Ripple-parent {
 	margin-top: 6rem;
 	background-color: #009245 !important;
 }
+
+

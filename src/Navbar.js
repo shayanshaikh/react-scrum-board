@@ -2,7 +2,7 @@ import React from 'react';
 import { MDBContainer, MDBBtn, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import logo from './logo.svg';
+import logo from './assets/logo.svg';
 
 class Navbar extends React.Component {
   constructor(props) {

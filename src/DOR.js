@@ -2,9 +2,10 @@ import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
+import { MDBBtn, MDBInput, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
 import firebaseApp from './firebaseApp';
+import Modal from './Modal'
 
 class DOR extends React.Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class DOR extends React.Component {
     this.state = {
       modal: false,
       definition: '',
-      definitions: []
+      definitions: [],
+      edit_modal: false,
+      edit_id: ''
     }
   }
     
@@ -20,6 +23,13 @@ class DOR extends React.Component {
   toggle = () => {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  edit_toggle = () => {
+    this.setState({
+      edit_modal: !this.state.edit_modal,
+      definition: ''
     });
   }
 
@@ -46,6 +56,17 @@ class DOR extends React.Component {
     this.toggle();
   }
 
+  handleEdit = (itemId) => {
+    if (!this.state.definition.length) {
+      return;
+    }
+
+    const itemRef = firebaseApp.database().ref(`/dor/${itemId}`);
+    itemRef.update({definition: this.state.definition});
+
+    this.edit_toggle();
+  }
+
   componentDidMount() {
     const definitionsRef = firebaseApp.database().ref('dor');
     definitionsRef.on('value', (snapshot) => {
@@ -69,6 +90,19 @@ class DOR extends React.Component {
     itemRef.remove();
   }
 
+  updateDOR(itemId) {
+    const itemRef = firebaseApp.database().ref(`/dor/${itemId}`);
+    itemRef.on('value', (snapshot) => {
+      if (snapshot && snapshot.exists()) {
+        let definition = snapshot.val();
+        this.setState({
+          definition: definition.definition,
+          edit_id: itemId,
+          edit_modal: !this.state.edit_modal
+        });
+      }
+    });
+  }
 
   render () {
     var definitions = [];
@@ -84,29 +118,45 @@ class DOR extends React.Component {
       <MDBCard className="card">
       <MDBCardBody>
       <MDBCardTitle>Definitions of Ready</MDBCardTitle>
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+New DOR</MDBBtn>
+      <MDBBtn color="primary" size="sm" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New DOR</MDBBtn>
       { definitions.length === 0 ? <div className="emptyTitleM">Looks like you have no definitions of ready try creating a new one.</div> : null }
       {definitions.map(definition => (
         <MDBCard key={definition.id} className="card">
         <MDBCardBody>
-        {definition.definition} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeDOR(definition.id)} }>×</MDBBtn>
+        {definition.definition} 
+        <MDBBtn className="editTask" color="indigo" size="sm" onClick={()=>{this.updateDOR(definition.id)}}><i className="fas fa-edit"></i></MDBBtn>
+        <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeDOR(definition.id)} }>×</MDBBtn>
         </MDBCardBody>
         </MDBCard>
 		  ))}
       </MDBCardBody>
       </MDBCard>
       </MDBContainer>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
-        <MDBModalHeader toggle={this.toggle}>Enter New Definition of Ready</MDBModalHeader>
-        <MDBModalBody>
-          Here is where you will define the criteria that a user story must pass before it is ready to be put into production.
-          <MDBInput type="text" name="definition" label="Definition of Ready" onChange={this.handleInput} background outline/>
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-          <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
-        </MDBModalFooter>
-      </MDBModal>
+      <Modal
+        title="Enter New Definition of Ready"
+        button_title="Submit"
+        modal_message="Here is where you will define the criteria that a user story must pass before it is ready to be put into production."
+        input_name="definition"
+        input_label="Definition of Ready"
+        handleInput={this.handleInput}
+        input_value={this.state.definition}
+        toggle={this.toggle}
+        modal={this.state.modal}
+        handleSubmit={this.handleSubmit}
+      />
+      <Modal
+        title="Editing Definition of Ready"
+        button_title="Update"
+        input_name="definition"
+        input_label="Definition of Ready"
+        handleInput={this.handleInput}
+        input_value={this.state.definition}
+        toggle={this.edit_toggle}
+        modal={this.state.edit_modal}
+        handleEdit={this.handleEdit}
+        status="edit"
+        edit_id={this.state.edit_id}
+      />
 		</React.Fragment>
     );
   }

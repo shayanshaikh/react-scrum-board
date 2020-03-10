@@ -79,8 +79,8 @@ class AcceptanceCriteria extends React.Component {
 
     return (
     <React.Fragment>
-      { acceptanceCriterias.length === 0 ? <div className="emptyTitleM">Looks like you have no acceptance criteria try creating a new one.</div> : null }
-      <MDBBtn color="primary" size="sm" onClick={this.toggle}>+Acceptance Criteria</MDBBtn>
+      { acceptanceCriterias.length === 0 ? <div className="emptyTitleM">Looks like you have no acceptance criteria try creating a new one.</div> : <span style={{color:"black"}}>Did you meet the</span> }
+      <MDBBtn color="primary" size="sm" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> Acceptance Criteria</MDBBtn>
       <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Enter New Acceptance Criteria</MDBModalHeader>
         <MDBModalBody>

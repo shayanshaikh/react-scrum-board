@@ -17,10 +17,46 @@ class Sprints extends React.Component {
       goals: [],
       selectedGoal: '',
       dueDate: '',
-      selectedSprint: ''
+      selectedSprint: '',
+      edit_modal: false,
+      edit_id: ''
     }
   }
     
+  edit_toggle = () => {
+    this.setState({
+      edit_modal: !this.state.edit_modal,
+      selectedGoal: '',
+      dueDate: ''
+    });
+  }
+
+  handleEdit = (itemId) => {
+    if (!this.state.selectedGoal.length || !this.state.dueDate.length) {
+      return;
+    }
+
+    const itemRef = firebaseApp.database().ref(`/sprints/${itemId}`);
+    itemRef.update({goal: this.state.selectedGoal, dueDate: this.state.dueDate});
+
+    this.edit_toggle();
+  }
+
+  update = (itemId) => {
+    const itemRef = firebaseApp.database().ref(`/sprints/${itemId}`);
+    itemRef.on('value', (snapshot) => {
+      if (snapshot && snapshot.exists()) {
+        let task = snapshot.val();
+        this.setState({
+          selectedGoal: task.goal,
+          dueDate: task.dueDate,
+          edit_id: itemId,
+          edit_modal: !this.state.edit_modal
+        });
+      }
+    });
+  }
+
   toggle = () => {
     this.setState({
       modal: !this.state.modal,
@@ -148,14 +184,18 @@ class Sprints extends React.Component {
 
     return (
       <React.Fragment>
-          <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle}>+New Sprint Plan</MDBBtn></h4>
+          <h4 className="w-50 text-center"><MDBBtn color="primary" size="sm" id="projectbtn" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New Sprint Plan</MDBBtn></h4>
           { sprints.length === 0 ? <h3 className="emptyTitle">Looks like you have no sprint plans try creating a new one.</h3> : null }
           {sprints.map(sprint => ( 
             <React.Fragment key={sprint.id} >     
             <MDBContainer className="w-75">
             <MDBCard className="card">
             <MDBCardBody>
-            <MDBCardTitle>Sprint {sprint.number} <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeSprint(sprint.id)} }>×</MDBBtn></MDBCardTitle>
+            <MDBCardTitle>
+            Sprint {sprint.number} 
+            <MDBBtn className="editTask" color="indigo" size="sm" onClick={()=>{this.update(sprint.id)}}><i className="fas fa-edit"></i></MDBBtn>
+            <MDBBtn className="deleteTask" color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeSprint(sprint.id)} }>×</MDBBtn>
+            </MDBCardTitle>
             Goal: {sprint.goal} <br/>
             <MDBCardText>
               Sprint Completion Date: {sprint.dueDate}<br/>
@@ -164,7 +204,7 @@ class Sprints extends React.Component {
             </MDBCardBody>
             </MDBCard>
             </MDBContainer>
-            {this.state.selectedSprint === sprint.id ? <Stories sprintID={this.state.selectedSprint} /> : null}
+            {this.state.selectedSprint === sprint.id ? <Stories user={this.props.user} sprintID={this.state.selectedSprint} /> : null}
             </React.Fragment>
           ))}
           <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
@@ -184,6 +224,24 @@ class Sprints extends React.Component {
             <MDBModalFooter>
               <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
               <MDBBtn color="primary" onClick={this.handleSubmit}>Save changes</MDBBtn>
+            </MDBModalFooter>
+          </MDBModal>
+          <MDBModal isOpen={this.state.edit_modal} toggle={this.edit_toggle} centered>
+            <MDBModalHeader toggle={this.edit_toggle}>Editing Sprint</MDBModalHeader>
+            <MDBModalBody>
+              { goals.length === 0 ? <h5 className="emptyTitle">Looks like you have no goals try adding some goals first.</h5> : null }
+              {goals.map(goal => (
+                <MDBCard key={goal.id} className="card">
+                <MDBCardBody>
+                <MDBCardText>{goal.goalName} <br/> { goal.goalName === this.state.selectedGoal ? <MDBBtn color="success" size="sm" onClick={this.deselectGoal}><i className="fas fa-check"></i>Selected</MDBBtn> : <MDBBtn color="info" size="sm" onClick={() => this.selectGoal(goal.goalName) }>Select</MDBBtn> }</MDBCardText>
+                </MDBCardBody>
+                </MDBCard>
+              ))}
+              <MDBInput type="text" name="dueDate" value={this.state.dueDate} label="Sprint Completion Date" onChange={this.handleInput} background outline/>
+            </MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn color="secondary" onClick={this.edit_toggle}>Close</MDBBtn>
+              <MDBBtn color="primary" onClick={()=>this.handleEdit(this.state.edit_id)}>Update</MDBBtn>
             </MDBModalFooter>
           </MDBModal>
       </React.Fragment>

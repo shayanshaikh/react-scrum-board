@@ -5,8 +5,10 @@ import 'mdbreact/dist/css/mdb.css';
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
 import Table from './Table';
+import Countdown from './Countdown';
 import SharedUsers from './SharedUsers';
 import firebaseApp from './firebaseApp';
+import Modal from './Modal';
 
 class Project extends React.Component {
   constructor(props) {
@@ -17,7 +19,9 @@ class Project extends React.Component {
       sharedUser: '',
       selectedProject: '',
       sharedUsers: [],
-      toggledProject: []
+      toggledProject: [],
+      edit_modal: false,
+      edit_id: ''
     }
   }
 
@@ -34,10 +38,15 @@ class Project extends React.Component {
     });
   }
 
-  handleInput = (input) => {
+  edit_toggle = () => {
     this.setState({
-      sharedUser: input
-    })
+      edit_modal: !this.state.edit_modal,
+      selectedProject: ''
+    });
+  }
+
+  handleInput = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = (e) => {
@@ -56,6 +65,17 @@ class Project extends React.Component {
     this.setState(state => ({
       sharedUser: ''
     }));
+  }
+
+  handleEdit = (itemId) => {
+    if (!this.state.selectedProject.length) {
+      return;
+    }
+
+    const itemRef = firebaseApp.database().ref(`/projects/${itemId}`);
+    itemRef.update({projectName: this.state.selectedProject});
+
+    this.edit_toggle();
   }
 
   componentDidMount() {
@@ -79,6 +99,18 @@ class Project extends React.Component {
   removeProject(itemId) {
     const itemRef = firebaseApp.database().ref(`/projects/${itemId}`);
     itemRef.remove();
+  }
+
+  updateProject(itemId) {
+    const itemRef = firebaseApp.database().ref(`/projects/${itemId}`);
+    itemRef.on('value', (snapshot) => {
+      let proj = snapshot.val();
+      this.setState({
+        selectedProject: proj.projectName,
+        edit_id: itemId,
+        edit_modal: !this.state.edit_modal
+      });
+    });
   }
 
   openProject = (project) => {
@@ -118,7 +150,7 @@ class Project extends React.Component {
 
     return (
       <React.Fragment>
-        { this.state.showResults ? <Table toggler={this.closeProject} project={this.state.toggledProject} /> : null }
+        { this.state.showResults ? <Table user={this.props.user} toggler={this.closeProject} project={this.state.toggledProject} /> : null }
       <MDBContainer>
         { projects.length === 0 ? <h3 className="emptyTitle">Looks like you have no projects try creating a new one.</h3> : null }
         { this.state.showResults ? null : <div className="m-5"><h4>Your Projects</h4><div className="break"></div></div> }
@@ -126,12 +158,22 @@ class Project extends React.Component {
           projects.map(project => (
             <MDBCard key={project.id} className="card">
             <MDBCardBody>
+            <MDBRow>
+            <MDBCol md="6">
             <MDBCardTitle>Project: {project.projectName}</MDBCardTitle>
             <MDBCardText>
               <MDBBtn color="info" size="sm" onClick={() => this.openProject(project)}>Open</MDBBtn>
-              <MDBBtn color="secondary" size="sm" onClick={() => this.shareModal(project.idd)}>Share</MDBBtn>
+              <MDBBtn color="secondary" size="sm" onClick={() => this.shareModal(project.idd)} className="hvr-icon-pulse-grow"><i className="fas fa-user-plus hvr-icon"></i> Share</MDBBtn>
+              <MDBBtn color="indigo" size="sm" onClick={()=>{this.updateProject(project.idd)}} className="hvr-icon-pulse-grow"><i className="fas fa-edit hvr-icon"></i> Edit</MDBBtn>
               <MDBBtn color="danger" size="sm" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeProject(project.idd)} }>Delete</MDBBtn>
             </MDBCardText>
+            </MDBCol>
+            <MDBCol md="2">
+            </MDBCol>
+            <MDBCol md="4">
+            <Countdown projectID={project.idd} />
+            </MDBCol>
+            </MDBRow>
             </MDBCardBody>
             </MDBCard>
           ))
@@ -149,11 +191,24 @@ class Project extends React.Component {
             </MDBCard>
           ))
         }
+        <Modal
+          title="Editing Project"
+          button_title="Update"
+          input_name="selectedProject"
+          input_label="Project Name"
+          handleInput={this.handleInput}
+          input_value={this.state.selectedProject}
+          toggle={this.edit_toggle}
+          modal={this.state.edit_modal}
+          handleEdit={this.handleEdit}
+          status="edit"
+          edit_id={this.state.edit_id}
+        />
 
         <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
           <MDBModalHeader toggle={this.toggle}>Share Project Access</MDBModalHeader>
           <MDBModalBody>
-            <MDBInput type="text" label="enter email to share" getValue={this.handleInput} background outline/>
+            <MDBInput type="text" name="sharedUser" label="enter email to share" onChange={this.handleInput} background outline/>
             <SharedUsers projectID={this.state.selectedProject} />
           </MDBModalBody>
           <MDBModalFooter>

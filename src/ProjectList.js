@@ -5,6 +5,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
+import './hover-min.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Project from './Project';
@@ -14,15 +15,16 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseApp from './firebaseApp';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import scrum1 from './scrum1.png';
-import scrum from './scrum.svg';
-import scrum2 from './scrum2.png';
-import scrum3 from './scrum3.png';
-import scrum4 from './scrum4.png';
-import scrum5 from './scrum5.png';
-import scrum6 from './scrum6.png';
-import scrum7 from './scrum7.png';
-import scrum8 from './scrum8.png';
+import scrum1 from './assets/scrum1.png';
+import scrum from './assets/scrum.svg';
+import scrum2 from './assets/scrum2.png';
+import scrum3 from './assets/scrum3.png';
+import scrum4 from './assets/scrum4.png';
+import scrum5 from './assets/scrum5.png';
+import scrum6 from './assets/scrum6.png';
+import scrum7 from './assets/scrum7.png';
+import scrum8 from './assets/scrum8.png';
+import stand from './assets/standup.gif';
 
 class ProjectList extends React.Component {
   constructor(props) {
@@ -111,24 +113,24 @@ class ProjectList extends React.Component {
             ? <React.Fragment>
               <h1 className="heading chalk">Scrum Planning<br/>Made Simple (ßeta...)</h1>
               <h3 className="welcomeUser">Welcome {user.displayName}</h3>
-              <h4 className="text-center"><MDBBtn color="primary" size="md" id="projectbtn" onClick={this.toggle}>+New Project</MDBBtn></h4>
+              <h4 className="text-center"><MDBBtn color="primary" size="lg" id="projectbtn" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New Project</MDBBtn></h4>
               </React.Fragment>
             : null
         }
         { user ? 
-          <Project toggler={this.projtoggle} projects={this.state.projects} />
+          <Project user={this.props.user} toggler={this.projtoggle} projects={this.state.projects} />
           : <React.Fragment>
             <MDBContainer>
             <h1 className="heading chalk">Scrum Planning<br/>Made Simple (ßeta...)</h1>
             <h2 className="heading">Please login above to use our beautiful services.</h2>
-            <h2 className="scrumheading">Join</h2><img src={scrum1} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Now</h2><img src={scrum2} className="img-fluid" alt="" />
-            <h2 className="scrumheading">To</h2><img src={scrum3} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Get</h2><img src={scrum4} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Your</h2><img src={scrum5} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Scrum</h2><img src={scrum6} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Plan</h2><img src={scrum7} className="img-fluid" alt="" />
-            <h2 className="scrumheading">Done</h2><img src={scrum8} className="img-fluid" alt="" />
+            <h2 className="scrumheading">Join</h2><img src={scrum1} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">Now</h2><img src={scrum2} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">To</h2><img src={scrum3} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">Get</h2><img src={scrum4} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">Your</h2><img src={scrum5} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">Scrum</h2><img src={scrum6} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">Plan</h2><img src={scrum7} className="img-fluid" loading="lazy" alt="..." />
+            <h2 className="scrumheading">Done</h2><img src={scrum8} className="img-fluid" loading="lazy" alt="..." />
             </MDBContainer>
             </React.Fragment> }
         <Footer />

@@ -9,6 +9,7 @@ import Goals from './Goals';
 import Sprints from './Sprints';
 import Releases from './Releases';
 import DOR from './DOR';
+import Standup from './Standup';
 import DOD from './DOD';
 import firebaseApp from './firebaseApp';
 
@@ -18,7 +19,8 @@ class Table extends React.Component {
     this.state = {
       modal: false,
       storyName: '',
-      userstories: []
+      userstories: [],
+      countDownDate: new Date().getTime()
     }
   }
     
@@ -26,6 +28,12 @@ class Table extends React.Component {
   toggle = () => {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  resetTimer = () => {
+    this.setState({
+      countDownDate: new Date().getTime()
     });
   }
 
@@ -87,14 +95,15 @@ class Table extends React.Component {
       <React.Fragment>
         <MDBContainer><MDBRow className="d-flex justify-content-center heading"><div className="chalk">{this.props.project.projectName}</div> <MDBBtn className="closing" color="warning" size="md" onClick={this.props.toggler}>Close</MDBBtn>
         </MDBRow></MDBContainer>
+        <Standup projectID={this.props.project.idd} />
         <div className="m-5 break"></div>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.props.project.idd} /></MDBCol>
         <MDBCol md="4"><DOR projectID={this.props.project.idd} /></MDBCol>
         <MDBCol md="4"><DOD projectID={this.props.project.idd} /></MDBCol>
         <MDBCol md="12"><div className="m-5 break"></div></MDBCol>
-        <MDBCol md="12"><h3 className="backlog">Product Backlog</h3></MDBCol>
-        <MDBCol md="12"><Releases projectID={this.props.project.idd} userstories={projectStory} /></MDBCol>
+        <MDBCol md="12"><h3 className="backlog">Release Plans</h3></MDBCol>
+        <MDBCol md="12"><Releases user={this.props.user} projectID={this.props.project.idd} userstories={projectStory} /></MDBCol>
         </MDBRow>
         <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
           <MDBModalHeader toggle={this.toggle}>Create New User Story</MDBModalHeader>

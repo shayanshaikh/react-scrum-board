@@ -7,6 +7,7 @@ import './index.css';
 import RowTasks from './RowTasks';
 import AcceptanceCriteria from './AcceptanceCriteria';
 import firebaseApp from './firebaseApp';
+import Modal from './Modal';
 
 class Rows extends React.Component {
   constructor(props) {
@@ -16,10 +17,11 @@ class Rows extends React.Component {
       taskName: '',
       taskPoints: '',
       tasks: [],
-      selectedStory: ''
+      selectedStory: '',
+      edit_modal: false,
+      edit_id: ''
     }
   }
-    
 
   toggle = () => {
     this.setState({
@@ -31,6 +33,40 @@ class Rows extends React.Component {
     this.setState({
       modal: !this.state.modal,
       selectedStory: name
+    });
+  }
+
+  edit_toggle = () => {
+    this.setState({
+      edit_modal: !this.state.edit_modal,
+      taskName: '',
+      taskPoints: ''
+    });
+  }
+
+  handleEdit = (itemId) => {
+    if (!this.state.taskName.length || !this.state.taskPoints.length) {
+      return;
+    }
+
+    const itemRef = firebaseApp.database().ref(`/tasks/${itemId}`);
+    itemRef.update({taskName: this.state.taskName, taskPoints: this.state.taskPoints});
+
+    this.edit_toggle();
+  }
+
+  update = (itemId) => {
+    const itemRef = firebaseApp.database().ref(`/tasks/${itemId}`);
+    itemRef.on('value', (snapshot) => {
+      if (snapshot && snapshot.exists()) {
+        let task = snapshot.val();
+        this.setState({
+          taskName: task.taskName,
+          taskPoints: task.taskPoints,
+          edit_id: itemId,
+          edit_modal: !this.state.edit_modal
+        });
+      }
     });
   }
 
@@ -48,7 +84,8 @@ class Rows extends React.Component {
       taskPoints: this.state.taskPoints,
       id: Date.now(),
       category: "todo",
-      storyID: this.state.selectedStory
+      storyID: this.state.selectedStory,
+      owner: this.props.user.displayName
     };
 
     const tasksRef = firebaseApp.database().ref('tasks');
@@ -73,7 +110,8 @@ class Rows extends React.Component {
           category: taskList[task].category,
           taskPoints: taskList[task].taskPoints,
           taskName: taskList[task].taskName,
-          storyID: taskList[task].storyID
+          storyID: taskList[task].storyID,
+          owner: taskList[task].owner
         });
       }
       this.setState({
@@ -96,18 +134,11 @@ class Rows extends React.Component {
 
      let tasks = this.state.tasks.filter((task) => {
          if (task.taskName === id) {
-          const newItem = {
-            taskName: task.taskName,
-            id: task.id,
-            category: cat,
-            taskPoints: task.taskPoints,
-            storyID: task.storyID
-          };
-          
           const itemRef = firebaseApp.database().ref(`/tasks/${task.idd}`);
-          itemRef.remove();
-          const tasksRef = firebaseApp.database().ref('tasks');
-          tasksRef.push(newItem);
+          itemRef.update({
+            category: cat,
+            owner: this.props.user.displayName
+          });
           task.category = cat;
          }
          return task;
@@ -147,7 +178,11 @@ class Rows extends React.Component {
 		  {this.props.userstories.map(userstory => (
       <MDBRow className="border border-dark" key={userstory.id}>
       <MDBCol md="3" className="border border-dark">
-      <h5 className="colHeader">User Story {userstory.number}: <MDBBtn className="deleteTask" size="sm" color="danger" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>×</MDBBtn></h5>
+      <h5 className="colHeader">
+      User Story {userstory.number}: 
+      <MDBBtn className="editTask" color="indigo" size="sm" onClick={()=>{this.props.update(userstory.id)}}><i className="fas fa-edit"></i></MDBBtn>
+      <MDBBtn className="deleteTask" size="sm" color="danger" onClick={() => { if (window.confirm("Are you sure you want to delete this permantly?")) this.removeStory(userstory.id)} }>×</MDBBtn>
+      </h5>
 		  <MDBCard className="task"><MDBCardBody>
       <div className="userstory">{userstory.storyName}</div>
       <div className="storyPoints">Story Points: {userstory.storyPoints}</div>
@@ -155,22 +190,75 @@ class Rows extends React.Component {
       <AcceptanceCriteria storyID={userstory.id}/>
       </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "todo")}>
-		  <h5 className="colHeader">To Do: <MDBBtn className="taskButton" color="primary" onClick={() => this.toggleAndSet(userstory.id)}>+New Task</MDBBtn></h5>
+		  <h5 className="colHeader">To Do: <MDBBtn color="primary" onClick={() => this.toggleAndSet(userstory.id)} className="taskButton hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New Task</MDBBtn></h5>
       <br/>
       { haskTasks ? null : <h3 className="emptyTitleM">Looks like you have no tasks yet try creating a new one.</h3>}
-      <RowTasks tasks={renTasks.todo} storyID={userstory.id}/>
+      <RowTasks 
+        user={this.props.user}
+        tasks={renTasks.todo} 
+        storyID={userstory.id}
+        handleInput={this.handleInput}
+        input_value={this.state.taskName}
+        input_value2={this.state.taskPoints}
+        toggle={this.edit_toggle}
+        modal={this.state.edit_modal}
+        handleEdit={this.handleEdit}
+        edit_id={this.state.edit_id}
+        update={this.update}
+      />
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "inprogress")}>
       <h5 className="colHeader">In Progress:</h5>
-      <RowTasks tasks={renTasks.inprogress} storyID={userstory.id}/>
+      <RowTasks 
+        user={this.props.user}
+        tasks={renTasks.inprogress} 
+        storyID={userstory.id}
+        handleInput={this.handleInput}
+        input_value={this.state.taskName}
+        input_value2={this.state.taskPoints}
+        toggle={this.edit_toggle}
+        modal={this.state.edit_modal}
+        handleEdit={this.handleEdit}
+        edit_id={this.state.edit_id}
+        update={this.update}
+      />
 		  </MDBCol>
       <MDBCol className="border border-dark" md="3" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, "done")}>
       <h5 className="colHeader">Done:</h5>
-      <RowTasks tasks={renTasks.done} storyID={userstory.id}/>
+      <RowTasks 
+        user={this.props.user}
+        tasks={renTasks.done} 
+        storyID={userstory.id}
+        handleInput={this.handleInput}
+        input_value={this.state.taskName}
+        input_value2={this.state.taskPoints}
+        toggle={this.edit_toggle}
+        modal={this.state.edit_modal}
+        handleEdit={this.handleEdit}
+        edit_id={this.state.edit_id}
+        update={this.update}
+      />
 		  </MDBCol>
       </MDBRow>
 		  ))}
       </div>
+      <Modal
+        title="Editing User Story"
+        button_title="Update"
+        input_name="storyName"
+        input_name2="storyPoints"
+        input_label="As a {user role} I want to..."
+        input_label2="Story Points"
+        handleInput={this.props.handleInput}
+        input_value={this.props.input_value}
+        input_value2={this.props.input_value2}
+        toggle={this.props.toggle}
+        modal={this.props.modal}
+        handleEdit={this.props.handleEdit}
+        second_input={true}
+        status="edit"
+        edit_id={this.props.edit_id}
+      />
       <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Create a New Task</MDBModalHeader>
         <MDBModalBody>
