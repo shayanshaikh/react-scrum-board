@@ -92,7 +92,7 @@ class Standup extends React.Component {
   
   render() {
     if (this.state.countDownDate) {
-      var countDownTimer = <div><h3>Time since last stand up meeting: <div className="standtimer"><img src={stand} className="standgif2" />{this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns {this.state.seconds}Sec <img src={stand} className="standgif" /></div></h3><MDBBtn color="deep-purple" size="md" onClick={() => this.resetTimer(this.state.countDownDateID)}>Reset Stand Up Timer</MDBBtn><MDBBtn color="danger" size="md" onClick={() => this.endTimer(this.state.countDownDateID)}>Stop Stand Up Timer</MDBBtn></div>;
+      var countDownTimer = <div><h4>Time since last stand up meeting: </h4><h5 className="standtimer"><img src={stand} className="standgif2" />{this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns<img src={stand} className="standgif" /></h5><MDBBtn color="deep-purple" size="md" onClick={() => { if (window.confirm("Did you really meet with your entire group? Did everyone really answer the 3 required questions?")) this.resetTimer(this.state.countDownDateID)} }>Reset Stand Up Timer</MDBBtn><MDBBtn color="danger" size="md" onClick={() => this.endTimer(this.state.countDownDateID)}>Stop Stand Up Timer</MDBBtn></div>;
     } else {
       var countDownTimer = <div><img src={stand} className="standgif" /><MDBBtn color="deep-purple" onClick={this.toggle}>Did you have your first Stand-up meeting?</MDBBtn><img src={stand} className="standgif2" /></div>;
     }

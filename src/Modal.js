@@ -10,7 +10,7 @@ class Modal extends React.Component {
   
   render() {
   return ( 
-    <MDBModal isOpen={this.props.modal} toggle={this.props.toggle} centered>
+    <MDBModal isOpen={this.props.modal} toggle={this.props.toggle} centered scrollable>
       <MDBModalHeader toggle={this.props.toggle}>{this.props.title}</MDBModalHeader>
       <MDBModalBody>
         {this.props.modal_message}

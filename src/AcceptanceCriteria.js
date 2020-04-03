@@ -81,7 +81,7 @@ class AcceptanceCriteria extends React.Component {
     <React.Fragment>
       { acceptanceCriterias.length === 0 ? <div className="emptyTitleM">Looks like you have no acceptance criteria try creating a new one.</div> : <span style={{color:"black"}}>Did you meet the</span> }
       <MDBBtn color="primary" size="sm" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> Acceptance Criteria</MDBBtn>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered scrollable>
         <MDBModalHeader toggle={this.toggle}>Enter New Acceptance Criteria</MDBModalHeader>
         <MDBModalBody>
           Here is where you will define the specific criteria that makes this user story ready to be delivered. 

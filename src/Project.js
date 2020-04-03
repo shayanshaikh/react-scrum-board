@@ -205,7 +205,7 @@ class Project extends React.Component {
           edit_id={this.state.edit_id}
         />
 
-        <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
+        <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered scrollable>
           <MDBModalHeader toggle={this.toggle}>Share Project Access</MDBModalHeader>
           <MDBModalBody>
             <MDBInput type="text" name="sharedUser" label="enter email to share" onChange={this.handleInput} background outline/>
