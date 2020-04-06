@@ -111,15 +111,17 @@ class Table extends React.Component {
 
     return (
       <React.Fragment>
+      <div className="scrum-board">
         <MDBContainer>
           <MDBRow className="d-flex justify-content-center heading">
           <div className="chalk">{this.state.projectName}</div> 
           <Link to=".."><MDBBtn className="closing" color="warning" size="md" >Close</MDBBtn></Link>
           </MDBRow>
-        </MDBContainer>
+        
         <Standupsend projectID={this.state.projectidd} />
 
         <div className="m-5 break"></div>
+        <MDBRow>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.state.projectidd} /></MDBCol>
         <MDBCol md="4"><DOR projectID={this.state.projectidd} /></MDBCol>
@@ -128,6 +130,8 @@ class Table extends React.Component {
         <MDBCol md="12"><h3 className="backlog">Release Plans</h3></MDBCol>
         <MDBCol md="12"><Releases user={this.props.user} projectID={this.state.projectidd} userstories={projectStory} /></MDBCol>
         </MDBRow>
+        </MDBRow>
+        </MDBContainer>
 
 
 
@@ -141,6 +145,7 @@ class Table extends React.Component {
             <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
+        </div>
       </React.Fragment>
     );
   }

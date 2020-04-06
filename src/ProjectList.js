@@ -73,9 +73,10 @@ class ProjectList extends React.Component {
             <HomePage   className="scrum-board" user={user}  />
           </Route>
         </Switch>
+        <Footer />
+
         </Router>
 
-        <Footer />
       </React.Fragment>
     );
   }

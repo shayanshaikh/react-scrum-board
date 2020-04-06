@@ -11,11 +11,13 @@ body {
   background-position: center; }
 
 
-body {
+.scrum-board {
   border-left: 1rem solid #cc9966;
-  border-right: 1rem solid #cc9966; }
+  border-right: 1rem solid #cc9966;
+  padding-bottom: 6rem;
+  margin: 0; }
   @media screen and (max-width: 768px) {
-    body {
+    .scrum-board {
       border-left: .5rem solid #cc9966;
       border-right: .5rem solid #cc9966; } }
 
@@ -308,9 +310,6 @@ button.btn-default.btn.Ripple-parent.standup {
 }
 
 #footer {
-	margin-left: -1rem;
-	margin-right: -1rem;
-	margin-top: 6rem;
 	background-color: #009245 !important;
 }
 

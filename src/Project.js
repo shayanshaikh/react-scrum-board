@@ -174,7 +174,8 @@ class Project extends React.Component {
 
     return (
       <React.Fragment>
-        <MDBContainer  className="scrum-board">        
+      <div className="scrum-board">
+        <MDBContainer>
           <h1 className="heading chalk">Scrum Planning<br/>Made Simple (ßeta...)</h1>
           {/*<h3 className="welcomeUser">Welcome {user.displayName}</h3>*/}
           <h4 className="text-center"><MDBBtn color="primary" size="lg" id="projectbtn" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New Project</MDBBtn></h4>
@@ -204,7 +205,7 @@ class Project extends React.Component {
             </MDBCard>
           ))
           }
-          
+                    
           <div className="m-5"><h4>Projects Shared with You</h4><div className="break"></div></div>
           { sharedProjects.map(project => (
               <MDBCard key={project.id} className="card">
@@ -216,9 +217,9 @@ class Project extends React.Component {
               </MDBCardBody>
               </MDBCard>
             ))
-          }          
+          }  
         </MDBContainer>
-
+        </div>
         <Modal
           title="Editing Project"
           button_title="Update"

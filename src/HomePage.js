@@ -23,6 +23,7 @@ class HomePage extends React.Component {
 
   render () {
     return (
+      <div className="scrum-board">
       <MDBContainer>
         <h1 className="heading chalk">Scrum Planning<br/>Made Simple (ßeta...)</h1>
         { this.props.user ? <h2 className="dashboard-heading">Open Your <Link to="/dashboard"><MDBBtn color="success">Dashboard</MDBBtn></Link> to Begin</h2> : <h2 className="heading">Please login above to use our beautiful services.</h2> }
@@ -35,6 +36,7 @@ class HomePage extends React.Component {
         <h2 className="scrumheading">Plan</h2><img src={scrum7} className="img-fluid" loading="lazy" alt="..." />
         <h2 className="scrumheading">Done</h2><img src={scrum8} className="img-fluid" loading="lazy" alt="..." />
       </MDBContainer>
+      </div>
     );
   }
 }
