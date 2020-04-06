@@ -140,7 +140,8 @@ button.btn-danger.btn.Ripple-parent.deleteTask.task.btn-sm {
 
 button.btn-primary.btn.Ripple-parent.taskButton {
 	padding: .4rem 1rem;
-	font-size: .4rem;
+	font-size: .8rem;
+	margin: 0;
 }
 
 button.btn-warning.btn.Ripple-parent {

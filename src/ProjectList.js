@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
@@ -10,7 +9,6 @@ import Footer from './Footer';
 import Project from './Project';
 import Table from './Table';
 import HomePage from './HomePage';
-import * as serviceWorker from './serviceWorker';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -55,7 +53,7 @@ class ProjectList extends React.Component {
       user,
       signOut,
       signInWithGoogle,
-      loading,
+      //loading,
     } = this.props;
     var signUp = <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseApp.auth()}/>;
 
@@ -63,16 +61,16 @@ class ProjectList extends React.Component {
       <React.Fragment>
         <Router>
         <ScrollToTop />
-        <Navbar user={this.props.user} signOut={this.props.signOut} signUp={signUp} signInWithGoogle={this.props.signInWithGoogle} projects={this.state.projects}/>
+        <Navbar user={user} signOut={signOut} signUp={signUp} signInWithGoogle={signInWithGoogle} projects={this.state.projects}/>
         <Switch>
           <Route path="/dashboard/projects/:id">
-            { this.props.user ? <Table user={this.props.user} /> : <Redirect to='/' /> }
+            { user ? <Table user={user} /> : <Redirect to='/' /> }
           </Route>
           <Route path="/dashboard">
-            { this.props.user ? <Project user={this.props.user} projects={this.state.projects} /> : <Redirect to='/' /> }
+            { user ? <Project user={user} projects={this.state.projects} /> : <Redirect to='/' /> }
           </Route>
           <Route path="/">
-            <HomePage   className="scrum-board" user={this.props.user}  />
+            <HomePage   className="scrum-board" user={user}  />
           </Route>
         </Switch>
         </Router>

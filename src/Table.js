@@ -7,7 +7,7 @@ import './index.css';
 import Goals from './Goals';
 import Releases from './Releases';
 import DOR from './DOR';
-import Standup from './Standup';
+import Standupsend from './Standupsend';
 import DOD from './DOD';
 import firebaseApp from './firebaseApp';
 import { Link, withRouter } from 'react-router-dom';
@@ -91,8 +91,6 @@ class Table extends React.Component {
         userstories: newState
       });
     });
-        console.log(this.state);
-
   }
 
   componentWillUnmount() {
@@ -119,7 +117,8 @@ class Table extends React.Component {
           <Link to=".."><MDBBtn className="closing" color="warning" size="md" >Close</MDBBtn></Link>
           </MDBRow>
         </MDBContainer>
-        <Standup projectID={this.state.projectidd} />
+        <Standupsend projectID={this.state.projectidd} />
+
         <div className="m-5 break"></div>
         <MDBRow>
         <MDBCol md="4"><Goals projectID={this.state.projectidd} /></MDBCol>

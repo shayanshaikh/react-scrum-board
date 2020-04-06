@@ -17,8 +17,8 @@ class CountDown extends React.Component {
   }
 
   componentDidMount() {
-    const standupsRef = firebaseApp.database().ref('standupdates');
-    standupsRef.on('value', (snapshot) => {
+    this.ref = firebaseApp.database().ref('standupdates');
+    this.ref.on('value', (snapshot) => {
       let standups = snapshot.val();
       for (let standup in standups) {
         if (standups[standup].projectID === this.props.projectID) {
@@ -50,6 +50,7 @@ class CountDown extends React.Component {
   
   componentWillUnmount() {
     clearInterval(this.interval);
+    this.ref.off();
   }
   
   render() {

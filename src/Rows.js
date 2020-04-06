@@ -132,7 +132,7 @@ class Rows extends React.Component {
   onDrop = (ev, cat) => {
      let id = ev.dataTransfer.getData("id");
 
-     let tasks = this.state.tasks.filter((task) => {
+     this.state.tasks.filter((task) => {
          if (task.taskName === id) {
           const itemRef = firebaseApp.database().ref(`/tasks/${task.idd}`);
           itemRef.update({
