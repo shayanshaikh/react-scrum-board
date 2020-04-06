@@ -32,7 +32,7 @@ class Navbar extends React.Component {
                 <MDBNavLink to="/" style={{margin:5}}>Home</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="/dashboard" style={{margin:5}}>Dashboard</MDBNavLink>
+                <MDBNavLink to="/dashboard" style={{margin:5}}><i className="fas fa-tachometer-alt"></i>Dashboard</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 {

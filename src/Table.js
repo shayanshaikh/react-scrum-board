@@ -112,27 +112,34 @@ class Table extends React.Component {
     return (
       <React.Fragment>
       <div className="scrum-board">
-        <MDBContainer>
+        <MDBContainer className="max-wide">
           <MDBRow className="d-flex justify-content-center heading">
           <div className="chalk">{this.state.projectName}</div> 
           <Link to=".."><MDBBtn className="closing" color="warning" size="md" >Close</MDBBtn></Link>
           </MDBRow>
         
-        <Standupsend projectID={this.state.projectidd} />
+        <MDBRow>
+        <MDBCol md="12"><Standupsend projectID={this.state.projectidd} /></MDBCol>
+        </MDBRow>
 
         <div className="m-5 break"></div>
         <MDBRow>
-        <MDBRow>
-        <MDBCol md="4"><Goals projectID={this.state.projectidd} /></MDBCol>
-        <MDBCol md="4"><DOR projectID={this.state.projectidd} /></MDBCol>
-        <MDBCol md="4"><DOD projectID={this.state.projectidd} /></MDBCol>
-        <MDBCol md="12"><div className="m-5 break"></div></MDBCol>
-        <MDBCol md="12"><h3 className="backlog">Release Plans</h3></MDBCol>
-        <MDBCol md="12"><Releases user={this.props.user} projectID={this.state.projectidd} userstories={projectStory} /></MDBCol>
+        <MDBCol md="4" className="no-pads"><Goals projectID={this.state.projectidd} /></MDBCol>
+        <MDBCol md="4" className="no-pads"><DOR projectID={this.state.projectidd} /></MDBCol>
+        <MDBCol md="4" className="no-pads"><DOD projectID={this.state.projectidd} /></MDBCol>
         </MDBRow>
+        <MDBRow>
+        <MDBCol md="12" className="no-pads"><div className="m-5 break"></div></MDBCol>
+        </MDBRow>
+        <MDBRow>
+        <MDBCol md="12" className="no-pads"><h3 className="backlog">Release Plans</h3></MDBCol>
+        </MDBRow>
+        <MDBRow>
+        <MDBCol md="12" className="no-pads"><Releases user={this.props.user} projectID={this.state.projectidd} userstories={projectStory} /></MDBCol>
         </MDBRow>
         </MDBContainer>
 
+      </div>
 
 
         <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
@@ -145,7 +152,7 @@ class Table extends React.Component {
             <MDBBtn color="primary" onClick={this.handleSubmit}>Submit</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
-        </div>
+
       </React.Fragment>
     );
   }

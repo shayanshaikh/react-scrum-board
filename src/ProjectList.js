@@ -70,7 +70,7 @@ class ProjectList extends React.Component {
             { user ? <Project user={user} projects={this.state.projects} /> : <Redirect to='/' /> }
           </Route>
           <Route path="/">
-            <HomePage   className="scrum-board" user={user}  />
+            <HomePage user={user}  />
           </Route>
         </Switch>
         <Footer />

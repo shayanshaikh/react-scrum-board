@@ -4,7 +4,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import * as DnD from './DragDropTouch';
 import ProjectList from './ProjectList';
-
+console.log(DnD);
 
 
 ReactDOM.render(<ProjectList />, document.getElementById('root'));

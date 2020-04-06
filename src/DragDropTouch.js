@@ -1,6 +1,5 @@
 var DragDropTouch;
 (function (DragDropTouch_1) {
-    'use strict';
     /**
      * Object used to hold the data that is being dragged during drag and drop operations.
      *
@@ -135,7 +134,7 @@ var DragDropTouch;
             this._lastClick = 0;
             // enforce singleton pattern
             if (DragDropTouch._instance) {
-                throw 'DragDropTouch instance already created.';
+                throw new Error('DragDropTouch instance already created.');
             }
             // detect passive event support
             // https://github.com/Modernizr/Modernizr/issues/1894
@@ -188,7 +187,7 @@ var DragDropTouch;
                         e.preventDefault();
                         // show context menu if the user hasn't started dragging after a while
                         setTimeout(function () {
-                            if (_this._dragSource == src && _this._img == null) {
+                            if (_this._dragSource === src && _this._img == null) {
                                 if (_this._dispatchEvent(e, 'contextmenu', src)) {
                                     _this._reset();
                                 }
@@ -227,7 +226,7 @@ var DragDropTouch;
                 if (this._img) {
                     this._lastTouch = e;
                     e.preventDefault(); // prevent scrolling
-                    if (target != this._lastTarget) {
+                    if (target !== this._lastTarget) {
                         this._dispatchEvent(this._lastTouch, 'dragleave', this._lastTarget);
                         this._dispatchEvent(e, 'dragenter', target);
                         this._lastTarget = target;
@@ -321,7 +320,7 @@ var DragDropTouch;
         // get the element at a given touch event
         DragDropTouch.prototype._getTarget = function (e) {
             var pt = this._getPoint(e), el = document.elementFromPoint(pt.x, pt.y);
-            while (el && getComputedStyle(el).pointerEvents == 'none') {
+            while (el && getComputedStyle(el).pointerEvents === 'none') {
                 el = el.parentElement;
             }
             return el;
@@ -398,7 +397,7 @@ var DragDropTouch;
             }
             dst.style.pointerEvents = 'none';
             // and repeat for all children
-            for (var i = 0; i < src.children.length; i++) {
+            for (i = 0; i < src.children.length; i++) {
                 this._copyStyle(src.children[i], dst.children[i]);
             }
         };
