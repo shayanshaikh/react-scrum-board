@@ -2,17 +2,13 @@ import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
+import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
 import './index.css';
-import Table from './Table';
 import Countdown from './Countdown';
 import SharedUsers from './SharedUsers';
 import firebaseApp from './firebaseApp';
 import Modal from './Modal';
-import { 
-  Switch,
-  Route,
-  Link, } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Project extends React.Component {
   constructor(props) {
@@ -178,7 +174,7 @@ class Project extends React.Component {
 
     return (
       <React.Fragment>
-        <MDBContainer>        
+        <MDBContainer  className="scrum-board">        
           <h1 className="heading chalk">Scrum Planning<br/>Made Simple (ßeta...)</h1>
           {/*<h3 className="welcomeUser">Welcome {user.displayName}</h3>*/}
           <h4 className="text-center"><MDBBtn color="primary" size="lg" id="projectbtn" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New Project</MDBBtn></h4>

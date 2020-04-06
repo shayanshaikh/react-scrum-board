@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import * as DnD from './DragDropTouch';
 import ProjectList from './ProjectList';
 
 

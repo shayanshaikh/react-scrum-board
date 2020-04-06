@@ -16,8 +16,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseApp from './firebaseApp';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import scrum from './assets/scrum.svg';
-import stand from './assets/standup.gif';
 import ScrollToTop from './ScrollToTop';
 import { 
   BrowserRouter as Router,
@@ -74,7 +72,7 @@ class ProjectList extends React.Component {
             { this.props.user ? <Project user={this.props.user} projects={this.state.projects} /> : <Redirect to='/' /> }
           </Route>
           <Route path="/">
-            <HomePage />
+            <HomePage   className="scrum-board" user={this.props.user}  />
           </Route>
         </Switch>
         </Router>

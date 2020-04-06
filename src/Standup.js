@@ -1,7 +1,7 @@
 import React from "react";
 import './index.css';
 import stand from './assets/standup.gif';
-import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBCol, MDBContainer, MDBRow, MDBFooter, MDBBtn } from "mdbreact";
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn } from "mdbreact";
 import firebaseApp from './firebaseApp';
 
 class Standup extends React.Component {
@@ -91,10 +91,11 @@ class Standup extends React.Component {
   }
   
   render() {
+    var countDownTimer = null;
     if (this.state.countDownDate) {
-      var countDownTimer = <div><h6>Time since last stand up meeting: </h6><p className="standtimer"><img src={stand} className="standgif2" />{this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns<img src={stand} className="standgif" /></p><MDBBtn color="deep-purple" size="sm" onClick={() => { if (window.confirm("Did you really meet with your entire group? Did everyone really answer the 3 required questions?")) this.resetTimer(this.state.countDownDateID)} }>Reset Stand Up Timer</MDBBtn><MDBBtn color="danger" size="sm" onClick={() => this.endTimer(this.state.countDownDateID)}>Stop Stand Up Timer</MDBBtn></div>;
+      countDownTimer = <div><h6>Time since last stand up meeting: </h6><p className="standtimer"><img src={stand} className="standgif2" alt="stand gif"/>{this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns<img src={stand} className="standgif"  alt="stand gif"/></p><MDBBtn color="deep-purple" size="sm" onClick={() => { if (window.confirm("Did you really meet with your entire group? Did everyone really answer the 3 required questions?")) this.resetTimer(this.state.countDownDateID)} }>Reset Stand Up Timer</MDBBtn><MDBBtn color="danger" size="sm" onClick={() => this.endTimer(this.state.countDownDateID)}>Stop Stand Up Timer</MDBBtn></div>;
     } else {
-      var countDownTimer = <div><img src={stand} className="standgif" /><MDBBtn color="deep-purple" onClick={this.toggle}>Did you have your first Stand-up meeting?</MDBBtn><img src={stand} className="standgif2" /></div>;
+      countDownTimer = <div><img src={stand} className="standgif" alt="stand gif" /><MDBBtn color="deep-purple" onClick={this.toggle}>Did you have your first Stand-up meeting?</MDBBtn><img src={stand} className="standgif2" alt="stand gif" /></div>;
     }
     return (
       <React.Fragment>

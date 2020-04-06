@@ -2,22 +2,15 @@ import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
+import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import './index.css';
-import Rows from './Rows';
 import Goals from './Goals';
-import Sprints from './Sprints';
 import Releases from './Releases';
-import Project from './Project';
 import DOR from './DOR';
 import Standup from './Standup';
 import DOD from './DOD';
 import firebaseApp from './firebaseApp';
-import { 
-  Switch,
-  Route,
-  Link,
-  withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class Table extends React.Component {
   constructor(props) {
@@ -100,6 +93,13 @@ class Table extends React.Component {
     });
         console.log(this.state);
 
+  }
+
+  componentWillUnmount() {
+    this.setState({
+        projectName: '',
+        projectidd: ''
+      });
   }
 
   render () {

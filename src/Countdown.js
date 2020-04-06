@@ -1,7 +1,6 @@
 import React from "react";
 import './index.css';
 import stand from './assets/standup.gif';
-import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBCol, MDBContainer, MDBRow, MDBFooter, MDBBtn } from "mdbreact";
 import firebaseApp from './firebaseApp';
 
 class CountDown extends React.Component {
@@ -57,7 +56,7 @@ class CountDown extends React.Component {
     return (
       <div className="projectTimer">
         { this.state.countDownDate ?
-          <div className="standtimer"><img src={stand} className="standgif3" /> {this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns {this.state.seconds}Sec </div>
+          <div className="standtimer"><img src={stand} className="standgif3" alt="standup gif"/> {this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns {this.state.seconds}Sec </div>
           : null}
       </div>
     )

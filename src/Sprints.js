@@ -2,10 +2,9 @@ import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBIcon, MDBBadge, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
+import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBContainer, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
 import './index.css';
 import firebaseApp from './firebaseApp';
-import Rows from './Rows';
 import Stories from './Stories';
 
 class Sprints extends React.Component {
@@ -188,7 +187,7 @@ class Sprints extends React.Component {
           { sprints.length === 0 ? <h3 className="emptyTitle">Looks like you have no sprint plans try creating a new one.</h3> : null }
           {sprints.map(sprint => ( 
             <React.Fragment key={sprint.id} >     
-            <MDBContainer className="w-75">
+            <MDBContainer className="sprint-card">
             <MDBCard className="card">
             <MDBCardBody>
             <MDBCardTitle>

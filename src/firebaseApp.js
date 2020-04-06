@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/database'; // If using Firebase database
+import 'firebase/auth';  // If using Firebase storage
 const config = {
     apiKey: "AIzaSyAGHNNPXxTDAgG6wpL5TxlFVcBV8X6T8dg",
     authDomain: "scrum-board-b1d2f.firebaseapp.com",

@@ -5,7 +5,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 const Footer = () => {
   return (
     <MDBFooter id="footer" className="font-small pt-4">
-      <MDBContainer fluid className="text-center text-md-left">
+      <MDBContainer fluid className="footer-border text-center text-md-left">
         <MDBRow>
           <MDBCol md="12"><div className="break"></div></MDBCol>
           <MDBCol md="3" className="footsvg"></MDBCol>
