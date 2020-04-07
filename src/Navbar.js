@@ -41,13 +41,11 @@ class Navbar extends React.Component {
                     : <MDBNavLink to="#"></MDBNavLink>
                 }             
               </MDBNavItem>
-              <MDBNavItem>
                 {
                   this.props.user
                     ? <MDBBtn size="md" color="danger" onClick={this.props.signOut}>Sign out</MDBBtn>
-                    : this.props.signUp //<MDBBtn size="md" onClick={this.props.signInWithGoogle}>Log in</MDBBtn>
+                    : <MDBBtn size="md" color="white" onClick={this.props.signInWithGoogle}>Sign in with Google</MDBBtn>
                 }
-              </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>

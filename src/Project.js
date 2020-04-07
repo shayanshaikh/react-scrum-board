@@ -187,7 +187,7 @@ class Project extends React.Component {
             <MDBCardBody>
             <MDBRow>
             <MDBCol md="6">
-            <MDBCardTitle>Project: {project.projectName}</MDBCardTitle>
+            <MDBCardTitle>{project.projectName}</MDBCardTitle>
             <MDBCardText>
               <Link to={"/dashboard/projects/" + project.idd}><MDBBtn color="info" size="sm" >Open</MDBBtn></Link>
               <MDBBtn color="secondary" size="sm" onClick={() => this.shareModal(project.idd)} className="hvr-icon-pulse-grow"><i className="fas fa-user-plus hvr-icon"></i> Share</MDBBtn>
@@ -205,7 +205,7 @@ class Project extends React.Component {
             </MDBCard>
           ))
           }
-                    
+
           <div className="m-5"><h4>Projects Shared with You</h4><div className="break"></div></div>
           { sharedProjects.map(project => (
               <MDBCard key={project.id} className="card">

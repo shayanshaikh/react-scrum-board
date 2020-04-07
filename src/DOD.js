@@ -122,7 +122,7 @@ class DOD extends React.Component {
       <MDBBtn color="primary" size="sm" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New DOD</MDBBtn>
       { definitions.length === 0 ? <div className="emptyTitleM">Looks like you have no definitions of done try creating a new one.</div> : null }
       {definitions.map(definition => (
-        <MDBCard key={definition.id} className="card">
+        <MDBCard key={definition.id} className="card no-margins">
         <MDBCardBody>
         {definition.definition} 
         <MDBBtn className="editTask" color="indigo" size="sm" onClick={()=>{this.updateDOD(definition.id)}}><i className="fas fa-edit"></i></MDBBtn>

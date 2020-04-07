@@ -41,6 +41,11 @@ code {
 	padding-right: 0 !important;
 }
 
+.card .no-margins {
+	margin-left: -.75rem;
+	margin-right: -.75rem;
+}
+
 .sprint-card {
   width: 75%!important; }
   @media screen and (max-width: 768px) {
@@ -282,14 +287,18 @@ footer.page-footer .footer-copyright  {
 }
 
 .standgif {
-  height: 5rem;
-}
+  height: 5rem; }
+  @media screen and (max-width: 768px) {
+    .standgif {
+      height: 3rem; } }
 
 .standgif2 {
   height: 5rem;
   -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-}
+  transform: scaleX(-1); }
+  @media screen and (max-width: 768px) {
+    .standgif2 {
+      height: 3rem; } }
 
 .standgif3 {
   height: 3rem;

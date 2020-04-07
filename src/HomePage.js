@@ -26,7 +26,9 @@ class HomePage extends React.Component {
       <div className="scrum-board">
       <MDBContainer>
         <h1 className="heading chalk">Scrum Planning<br/>Made Simple (ßeta...)</h1>
-        { this.props.user ? <h2 className="dashboard-heading">Open Your <Link to="/dashboard"><MDBBtn color="success" className="hvr-icon-pulse-grow"><i className="fas fa-tachometer-alt hvr-icon" style={{margin:5}}></i>Dashboard</MDBBtn></Link> to Begin</h2> : <h2 className="heading">Please login above to use our beautiful services.</h2> }
+        { this.props.user ? 
+          <h2 className="dashboard-heading">Open Your <Link to="/dashboard"><MDBBtn color="success" className="hvr-icon-pulse-grow"><i className="fas fa-tachometer-alt hvr-icon" style={{margin:5}}></i>Dashboard</MDBBtn></Link> to Begin</h2>
+           : this.props.signUp }
         <h2 className="scrumheading">Join</h2><img src={scrum1} className="img-fluid" loading="lazy" alt="..." />
         <h2 className="scrumheading">Now</h2><img src={scrum2} className="img-fluid" loading="lazy" alt="..." />
         <h2 className="scrumheading">To</h2><img src={scrum3} className="img-fluid" loading="lazy" alt="..." />

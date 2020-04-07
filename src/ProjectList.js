@@ -70,7 +70,7 @@ class ProjectList extends React.Component {
             { user ? <Project user={user} projects={this.state.projects} /> : <Redirect to='/' /> }
           </Route>
           <Route path="/">
-            <HomePage user={user}  />
+            <HomePage user={user}  signUp={signUp} />
           </Route>
         </Switch>
         <Footer />
@@ -95,7 +95,8 @@ const uiConfig = {
   signInSuccessUrl: '',
   // We will display Google and Facebook as auth providers.
   signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
   ]
 };
 

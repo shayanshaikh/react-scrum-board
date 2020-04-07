@@ -57,7 +57,7 @@ class CountDown extends React.Component {
     return (
       <div className="projectTimer">
         { this.state.countDownDate ?
-          <div className="standtimer"><img src={stand} className="standgif3" alt="standup gif"/> {this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns {this.state.seconds}Sec </div>
+          <div className="standtimer"><img src={stand} className="standgif3" alt="standup gif"/> {this.state.days}Days {this.state.hours}Hrs {this.state.minutes}Mns</div>
           : null}
       </div>
     )

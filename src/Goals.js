@@ -122,7 +122,7 @@ class Goals extends React.Component {
       <MDBBtn color="primary" size="sm" onClick={this.toggle} className="hvr-icon-pulse-grow"><i className="fas fa-plus hvr-icon"></i> New HLG</MDBBtn>
       { goals.length === 0 ? <div className="emptyTitleM">Looks like you have no high level goals try creating a new one.</div> : null }
       {goals.map(goal => (
-        <MDBCard key={goal.id} className="card">
+        <MDBCard key={goal.id} className="card no-margins">
         <MDBCardBody>
         {goal.goalName} 
         <MDBBtn className="editTask" color="indigo" size="sm" onClick={()=>{this.update(goal.id)}}><i className="fas fa-edit"></i></MDBBtn>
